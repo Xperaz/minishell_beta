@@ -125,9 +125,9 @@ char	*ft_normal(char *line, int start)
 	}
 	tok = (char *)malloc((i + 1) * sizeof(char));
 	j = 0;
+	tok[i] = '\0';
 	while (j < i)
 		tok[j++] = line[len++];
-	tok[j] = '\0';
 	return(tok);
 }
 
@@ -174,7 +174,7 @@ t_token	*ft_tokens(char *line)
 			else
 			{
 				add_to_end(&list, tok);
-				i += ft_strlen(ft_normal(line, i));
+				i += ft_strlen(ft_normal(line, i + 1));
 			}
 		}
 		i++;
