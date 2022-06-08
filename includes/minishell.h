@@ -38,4 +38,8 @@ void	add_to_end(t_token** head, char *data);
 void    list_clear(t_token** head_ref);
 void	delete_node(t_token** head, t_token *del_node);
 
+//token_utils
+int		ft_isspace(char c);
+char	*ft_strndup(char *str, int n);
+
 #endif

@@ -29,6 +29,41 @@ void display(t_token* node) {
 /*                     get_tokens                       */
 /* **************************************************** */
 
+int		check_redirection(char *tok)
+{
+	int	i;
+
+	i = 0;
+	while (tok[i])
+	{
+		if (tok[i] == '>' || tok[i] == '<')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+char	*ft_redirection(char *tok, int n)
+{
+	char	*res;
+	int		i;
+	int		j;
+	int		start;
+
+	i = 0;
+	start = n;
+	while (tok[n] == '>' || tok[n] == '<')
+	{
+		n++;
+		i++;
+	}
+	res = malloc((i + 1) * sizeof(char));
+	j = 0;
+	while (j < i)
+		res[j++] = tok[start++];
+	res[j] = '\0';
+	return (res);
+}
 
 char	*ft_single_quote(char *line, int start)
 {
@@ -39,20 +74,20 @@ char	*ft_single_quote(char *line, int start)
 
 	i = 0;
 	len = start;
-	while (line[start] != '\'' && line[start] != '\0' && line[start] != '\n')
+	while (line[start] != '\'' && line[start] != '\n' && line[start] != '\0')
 	{
 		start++;
 		i++;
 	}
 	tok = (char *)malloc((i + 1) * sizeof(char));
 	j = 0;
-	tok[i + 1] = '\0';
 	while (i--)
 		tok[j++] = line[len++];
+	tok[j] = '\0';
 	return(tok);
 }
 
-char	*ft_double_quote(char *line, int start)
+char	*ft_double_quote(t_token *list,char *line, int start)
 {
 	int		i;
 	char	*tok;
@@ -68,9 +103,9 @@ char	*ft_double_quote(char *line, int start)
 	}
 	tok = (char *)malloc((i + 1) * sizeof(char));
 	j = 0;
-	tok[i + 1] = '\0';
-	while (i--)
+	while (j < i)
 		tok[j++] = line[len++];
+	tok[j] = '\0';
 	return(tok);
 }
 
@@ -83,54 +118,77 @@ char	*ft_normal(char *line, int start)
 
 	i = 0;
 	len = start;
-	while (line[start] != ' ' && line[start] != '\0' && line[start] != '\'' && line[start] != '"')
+	while (line[start] != ' ' && line[start] != '\0' && line[start] != '\'' && line[start] != '"' && line[start] != '\'')
 	{
 		start++;
 		i++;
 	}
 	tok = (char *)malloc((i + 1) * sizeof(char));
 	j = 0;
-	tok[i + 1] = '\0';
-	while (i--)
+	while (j < i)
 		tok[j++] = line[len++];
+	tok[j] = '\0';
 	return(tok);
 }
 
-void	ft_lexer(char *line)
+t_token	*ft_tokens(char *line)
 {
 	t_token		*list;
 	int			i;
 	int			len;
-	char		*str;
+	char		*tok;
 
-	//cmd = ft_strtrim(line, " ");
 	list = NULL;
 	i = 0;
 	while (line[i])
 	{
-		while (line[i] == ' ')
+		while (ft_isspace(line[i]))
 				i++;
-		if (line[i] != '\'' && line[i] != '"')
+		if (line[i] == '"')
 		{
-			while (line[i] == ' ')
-				i++;
-			add_to_end(&list, ft_normal(line, i));
-			i += ft_strlen(ft_normal(line, i));
-		}
-		else if (line[i] == '"')
-		{
-			add_to_end(&list, ft_double_quote(line, i + 1));
-			i += ft_strlen(ft_double_quote(line, i + 1));
+			add_to_end(&list, ft_double_quote(list, line, i + 1));
+			i += ft_strlen(ft_double_quote(list, line, i + 1));
 			i++;
 		}
 		else if (line[i] == '\'')
 		{
 			add_to_end(&list, ft_single_quote(line, i + 1));
 			i += ft_strlen(ft_single_quote(line, i + 1));
-			i++;
+		}
+		else
+		{
+			tok = ft_normal(line, i);
+			if (check_redirection(tok) >= 0)
+			{
+				int pos = check_redirection(tok);
+				if (pos != 0)
+				{
+					char *ptr = ft_strndup(tok, pos + 1);
+					i += pos;
+					add_to_end(&list, ptr);
+				}
+				char *tmp = ft_redirection(tok, pos);
+				add_to_end(&list, tmp);
+				i += ft_strlen(tmp) - 1;
+			}
+			else
+			{
+				add_to_end(&list, tok);
+				i += ft_strlen(ft_normal(line, i));
+			}
 		}
 		i++;
 	}
+	return (list);
+}
+
+void	ft_lexer(char *line)
+{
+	t_token	*list;
+	char	*cmd;
+
+	cmd = ft_strtrim(line, " ");
+	list = ft_tokens(cmd);
 	display(list);
 }
 
