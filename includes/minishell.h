@@ -39,6 +39,7 @@ void    list_clear(t_token** head_ref);
 void	delete_node(t_token** head, t_token *del_node);
 
 //tokenizer_utils
+t_token	*ft_tokens(char *line);
 //utils1
 int		ft_isspace(char c);
 char	*ft_strndup(char *str, int n);
