@@ -4,7 +4,8 @@ FLAGS = -Wall -Wextra -Werror -lreadline
 
 SRCF = sources/
 
-SRC  = minishell.c checker.c list_utils.c token_utils.c
+SRC  = minishell.c checker.c list_utils.c \
+	toknizer_utils1.c toknizer_utils2.c toknizer_utils3.c
 
 SRCP = $(addprefix $(SRCF), $(SRC))
 

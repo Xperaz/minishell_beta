@@ -38,8 +38,23 @@ void	add_to_end(t_token** head, char *data);
 void    list_clear(t_token** head_ref);
 void	delete_node(t_token** head, t_token *del_node);
 
-//token_utils
+//tokenizer_utils
+//utils1
 int		ft_isspace(char c);
 char	*ft_strndup(char *str, int n);
+char	*ft_normal(char *line, int start);
+
+//utils2_quotes_tokens
+char	*ft_double_quote(char *line, int start);
+char	*ft_single_quote(char *line, int start);
+void	tokenize_quotes(t_token **list, char *line, int *i);
+void	double_quotes(t_token **list, char *line, int *i);
+void	single_quotes(t_token **list, char *line, int *i);
+
+//utils3_redirections_tokens
+int		check_redirection(char *tok);
+char	*ft_redirection(char *tok, int n);
+void	redirections(t_token **list, char *line, int *i);
+void	redirection1(t_token **list, char *tok, char *line, int *i);
 
 #endif
