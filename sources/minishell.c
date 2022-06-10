@@ -26,8 +26,44 @@ void display(t_token* node) {
 
 
 /* **************************************************** */
-/*                     get_tokens                       */
+/*                     SYNTAX_ANALYZER.                 */
 /* **************************************************** */
+
+int	invalid_token(char *node)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_strncmp(node, "()", 2) || !ft_strncmp(node, "||", 2) || !ft_strncmp(node, "&&", 2))
+		return (0);
+	return (1);
+}
+
+int	is_redirection(char *tok)
+{
+	if (!ft_strncmp(tok, ">", 1) || !ft_strncmp(tok, "<", 1)
+			|| !ft_strncmp(tok, ">>", 2) || !ft_strncmp(tok, "<<", 1))
+			return (1);
+	return (0);	
+}
+
+int		syntax_validation(t_token	*list)
+{
+	t_token	*tmp;
+
+	tmp = list;
+	int flag = 0;
+	while (tmp != NULL)
+	{
+		if (!invalid_token(tmp->data))
+			return (0);
+		else if (is_redirection(tmp->data) &&
+			(tmp->next == NULL || is_redirection(tmp->next->data)))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
 
 void	ft_lexer(char *line)
 {
@@ -36,6 +72,12 @@ void	ft_lexer(char *line)
 
 	cmd = ft_strtrim(line, " ");
 	list = ft_tokens(cmd);
+	if (!syntax_validation(list))
+	{
+		printf("Error occured\n");
+		rl_on_new_line();
+		//exit(1);
+	}
 	display(list);
 }
 
