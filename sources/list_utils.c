@@ -13,13 +13,14 @@ void add_front(t_token** head, char *data)
 	(*head) = newNode;
 }
 
-void	add_to_end(t_token** head, char *data)
+void	add_to_end(t_token** head, char *data, int ident)
 {
 	t_token*	newNode;
 	t_token*	temp;
 
 	newNode = (t_token*)malloc(sizeof(t_token));
 	newNode->data = data;
+	newNode->key = ident;
 	newNode->next = NULL;
 	temp = *head;
 	if (*head == NULL)
@@ -59,4 +60,19 @@ void	list_clear(t_token** head_ref)
 		delete_node(head_ref, temp);
 		temp = next;
 	}
+}
+
+int	lstsize(t_token *lst)
+{
+	int		i;
+	t_token	*new;
+
+	new = lst;
+	i = 0;
+	while (new != NULL)
+	{
+		i++;
+		new = new->next;
+	}
+	return (i);
 }

@@ -17,10 +17,11 @@ void display(t_token* node) {
 
 	t_token	*tmp;
 	tmp = node;
-  while (tmp != NULL) {
-    printf("{%s} ", tmp->data);
-    tmp = tmp->next;
-  }
+    while (tmp)
+	{
+		printf("{%s} => {%d}\n", tmp->data, tmp->key);
+   		tmp = tmp->next;
+	}
   printf("\n");
 }
 
@@ -29,42 +30,33 @@ void display(t_token* node) {
 /*                     SYNTAX_ANALYZER.                 */
 /* **************************************************** */
 
-int	invalid_token(char *node)
-{
-	int	i;
+// int		check_operator(t_token *list)
+// {
+// 	t_token	*tmp;
+// 	int		i;
 
-	i = 0;
-	if (!ft_strncmp(node, "()", 2) || !ft_strncmp(node, "||", 2) || !ft_strncmp(node, "&&", 2))
-		return (0);
-	return (1);
-}
+// 	i = 0;
+// 	tmp = list;
+// 	while (tmp)
+// 	{
+// 		if (is_operator(tmp->data))
+// 			i++;
+// 		tmp = tmp->next;
+// 	}
+// 	return (i);
+// }
 
-int	is_redirection(char *tok)
-{
-	if (!ft_strncmp(tok, ">", 1) || !ft_strncmp(tok, "<", 1)
-			|| !ft_strncmp(tok, ">>", 2) || !ft_strncmp(tok, "<<", 1))
-			return (1);
-	return (0);	
-}
+// void	parser(t_token *tokens)
+// {
+// 	t_token	*tmp;
+// 	t_cmd	*list;
+// 	int		len;
 
-int		syntax_validation(t_token	*list)
-{
-	t_token	*tmp;
+// 	len = lstsize(tokens);
+// 	printf("{%d} {%d}\n", len, check_operator(tokens));
+// }
 
-	tmp = list;
-	int flag = 0;
-	while (tmp != NULL)
-	{
-		if (!invalid_token(tmp->data))
-			return (0);
-		else if (is_redirection(tmp->data) &&
-			(tmp->next == NULL || is_redirection(tmp->next->data)))
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
+/*                         LEXER.                       */
 void	ft_lexer(char *line)
 {
 	t_token	*list;
@@ -76,8 +68,8 @@ void	ft_lexer(char *line)
 	{
 		printf("Error occured\n");
 		rl_on_new_line();
-		//exit(1);
 	}
+	// parser(list);
 	display(list);
 }
 

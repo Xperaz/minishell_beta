@@ -23,6 +23,5 @@ t_token	*ft_tokens(char *line)
 				redirection1(&list, tok, line, &i);
 		}
 	}
-	free(tok);
 	return (list);
 }

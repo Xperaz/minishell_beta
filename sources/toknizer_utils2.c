@@ -46,17 +46,31 @@ char	*ft_double_quote(char *line, int start)
 
 void	single_quotes(t_token **list, char *line, int *i)
 {
-	add_to_end(list, ft_single_quote(line, *i + 1));
+	add_to_end(list, ft_single_quote(line, *i + 1), S_QUOTES);
 	*i += ft_strlen(ft_single_quote(line, *i + 1)) + 1;
 }
 
 void	double_quotes(t_token **list, char *line, int *i)
 {
-	char *ptr;
+	char	*ptr;
+	int		d;
+	char	*dollar;
 
-	ptr = ft_double_quote(line, *i + 1);
-	add_to_end(list, ptr);
-	*i += ft_strlen(ptr) + 1;
+	 ptr = ft_double_quote(line, *i + 1);
+	 d = is_dollar(ptr);
+	if (d != -1 && have_space(ptr))
+	{
+		if (d > 0)
+		add_to_end(list, ft_strndup(ptr, d + 1), WORD);
+		dollar = ft_strchr(ptr, '$');
+		ft_dollar(list, dollar);
+		*i += ft_strlen(ptr) + 1;
+	}
+	else
+	{
+		add_to_end(list, ptr, D_QUOTES);
+		*i += ft_strlen(ptr) + 1;
+	}
 }
 
 void	tokenize_quotes(t_token **list, char *line, int *i)
