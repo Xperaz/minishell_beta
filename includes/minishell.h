@@ -15,7 +15,7 @@
 # define MINISHELL_H
 enum coammands_list {COMMAND = 1, WORD, D_QUOTES, S_QUOTES, 
 					O_REDIRECTION, I_REDIRECTION, 
-					ASO, ASI, OPTION, FL, DOLLAR};//ASO/ASI : appending standard output/input (>>/<<)
+					ASO, HERDOC, DELIMTER, OPTION, FL, DOLLAR, PIPE};//ASO/ASI : appending standard output/input (>>/<<)
 
 # include	<stdio.h>
 # include	<stdlib.h>
@@ -44,7 +44,7 @@ int     command_checker(char *command);
 
 //lists_utils_functions
 void    add_front(t_token** head, char *data);
-void	add_to_end(t_token** head, char *data, int ident);
+void	add_to_end(t_token** head, char *data);
 void    list_clear(t_token** head_ref);
 void	delete_node(t_token** head, t_token *del_node);
 int		lstsize(t_token *lst);
@@ -73,6 +73,12 @@ void	redirection1(t_token **list, char *tok, char *line, int *i);
 int		have_space(char *tok);
 int		is_dollar(char *tok);
 void	ft_dollar(t_token **list, char *tok);
+
+//Flaging Functions 
+void	flag_list(t_token *list);
+void	add_flag(t_token *tmp);
+int		check_cmd(char *tok);
+int		wich_redirection(char *red);
 
 //Syntax analyser
 int		invalid_token(char *node);

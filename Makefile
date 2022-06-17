@@ -6,7 +6,7 @@ SRCF = sources/
 
 SRC  = minishell.c checker.c list_utils.c \
 	tokenizer.c toknizer_utils1.c toknizer_utils2.c toknizer_utils3.c \
-	toknizer_utils4.c syntax_validation.c \
+	toknizer_utils4.c syntax_validation.c add_flag.c\
 
 SRCP = $(addprefix $(SRCF), $(SRC))
 

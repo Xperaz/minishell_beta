@@ -25,38 +25,8 @@ void display(t_token* node) {
   printf("\n");
 }
 
-
-/* **************************************************** */
-/*                     SYNTAX_ANALYZER.                 */
-/* **************************************************** */
-
-// int		check_operator(t_token *list)
-// {
-// 	t_token	*tmp;
-// 	int		i;
-
-// 	i = 0;
-// 	tmp = list;
-// 	while (tmp)
-// 	{
-// 		if (is_operator(tmp->data))
-// 			i++;
-// 		tmp = tmp->next;
-// 	}
-// 	return (i);
-// }
-
-// void	parser(t_token *tokens)
-// {
-// 	t_token	*tmp;
-// 	t_cmd	*list;
-// 	int		len;
-
-// 	len = lstsize(tokens);
-// 	printf("{%d} {%d}\n", len, check_operator(tokens));
-// }
-
 /*                         LEXER.                       */
+
 void	ft_lexer(char *line)
 {
 	t_token	*list;
@@ -69,7 +39,7 @@ void	ft_lexer(char *line)
 		printf("Error occured\n");
 		rl_on_new_line();
 	}
-	// parser(list);
+	flag_list(list);
 	display(list);
 }
 

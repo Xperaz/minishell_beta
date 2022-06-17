@@ -15,7 +15,7 @@ void	ft_dollar(t_token **list, char *tok)
 	while (++i < len)
 		dollar[i] = tok[i];
 	dollar[i] = '\0';
-	add_to_end(list, dollar, DOLLAR); 
+	add_to_end(list, dollar); 
 	if (i < ft_strlen(tok))
 	{
 		rest = malloc(((ft_strlen(tok) - len) + 1) * sizeof(char));
@@ -23,7 +23,7 @@ void	ft_dollar(t_token **list, char *tok)
 		while (i < ft_strlen(tok))
 			rest[i++] = tok[len++];
 		rest[i] = '\0';
-		add_to_end(list, rest, WORD);
+		add_to_end(list, rest);
 	}
 }
 
