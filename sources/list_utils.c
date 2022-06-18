@@ -1,5 +1,34 @@
 #include "../includes/minishell.h"
 
+t_token	*last_token(t_token *token)
+{
+	t_token	*last;
+
+	last = NULL;
+	if (token)
+	{
+		last = token;
+		while (last && last->next)
+			last = last->next;
+	}
+	return (last);
+}
+
+t_token	*new_token(char *data, int size, t_token_type type)
+{
+	t_token	*new;
+
+	new = (t_token *)malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->data = ft_sub_str(data, size);
+	new->size = size;
+	new->type = type;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
+
 void add_front(t_token** head, char *data)
 {
 	t_token*	newNode;
@@ -13,25 +42,19 @@ void add_front(t_token** head, char *data)
 	(*head) = newNode;
 }
 
-void	add_to_end(t_token** head_ref, char *data)
+void	add_to_end(t_token** token, t_token *new)
 {
-    t_token* new_node;
-    t_token* last;
+    t_token	*tmp;
 
-	new_node = (t_token*)malloc(sizeof(t_token));
-	last = *head_ref;
-    new_node->data = data;
-    new_node->next = NULL;
-    if (*head_ref == NULL) {
-        new_node->prev = NULL;
-        *head_ref = new_node;
-        return;
-    }
-    while (last->next != NULL)
-        last = last->next;
-    last->next = new_node;
-    new_node->prev = last;
-    return;
+	if ((*token) && new)
+	{
+		tmp = last_token((*token));
+		new->prev = tmp;
+		tmp->next = new;
+	}
+	else
+		(*token) = new;
+	(*token)->taille++;
 }
 
 void	delete_node(t_token** head, t_token *del_node)

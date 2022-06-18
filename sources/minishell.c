@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 18:08:16 by houazzan          #+#    #+#             */
-/*   Updated: 2022/05/28 13:20:04 by houazzan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
@@ -19,7 +8,7 @@ void display(t_token* node) {
 	tmp = node;
     while (tmp)
 	{
-		printf("{%s} => {%d}\n", tmp->data, tmp->key);
+		printf("{%s} => {%d} => |%d|\n", tmp->data, tmp->key, tmp->type);
    		tmp = tmp->next;
 	}
   printf("\n");
