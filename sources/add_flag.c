@@ -52,6 +52,8 @@ void	add_flag(t_token *tmp)
 	}
 	else if (!strncmp(tmp->data, "|", 1))
 		tmp->key = PIPE;
+	else if (!strncmp(tmp->data, "|", 1))
+		tmp->type = D_QUOTES;
 	else
 		tmp->key = WORD;
 }

@@ -1,27 +1,79 @@
 #include "../includes/minishell.h"
 
-t_token	*ft_tokens(char *line)
+static t_token_type	token_found(const char *cmd_line)
 {
-	t_token	*list;
-	char	*tok;
+	if (ft_strncmp(cmd_line, "<<", 2) == 0)
+		return (AS_input);
+	else if (ft_strncmp(cmd_line, ">>", 2) == 0)
+		return (AS_output);
+	else if (ft_strncmp(cmd_line, "<", 1) == 0)
+		return (INPUT);
+	else if (ft_strncmp(cmd_line, ">", 1) == 0)
+		return (OUTPUT);
+	else if (ft_strncmp(cmd_line, "|", 1) == 0)
+		return (TOKEN_PIPE);
+	else
+		return (TOKEN_WORD);
+}
+
+int	get_word_token_size(char *cmd_line)
+{
+	t_token	*tmp;
+	size_t	i;
+	int		double_quote;
+	int		single_quote;
+
+	double_quote = 0;
+	single_quote = 0;
+	i = 0;
+	while (cmd_line[i] && (!ft_strchr(" |<>", cmd_line[i])
+			|| double_quote || single_quote))
+	{
+		if (cmd_line[i] == '\"' && !single_quote)
+			double_quote = 1 - double_quote;
+		else if (cmd_line[i] == '\'' && !double_quote)
+			single_quote = 1 - single_quote;
+		i++;
+	}
+	return (i);
+}
+
+void	get_next_token(char *cmd_line, int *size, t_token_type *type)
+{
+	*size = 0;
+	*type = token_found(cmd_line);
+	if (*type != TOKEN_WORD)
+	{
+		*size = 1;
+		if (*type == AS_input || *type == AS_output)
+			*size = 2;
+	}
+	else
+		*size = get_word_token_size(cmd_line);
+}
+
+t_token	*ft_tokens(char *cmd_line)
+{
+	t_token	*token;
+	t_token	tokn;
+	t_token	*tok;
 	int		i;
 
-	list = NULL;
-	i = -1;
-	while (line[++i])
+	token = NULL;
+	i = 0;
+	while (cmd_line[i])
 	{
-		while (ft_isspace(line[i]))
+		if (cmd_line[i] == ' ')
 			i++;
-		if (line[i] == '"' || line[i] == '\'')
-			tokenize_quotes(&list, line, &i);
 		else
 		{
-			tok = ft_normal(line, i);
-			if (check_redirection(tok) >= 0)
-				redirections(&list, tok, &i);
-			else
-				redirection1(&list, tok, line, &i);
+			get_next_token(cmd_line + i, &tokn.size, &tokn.type);
+			tok = new_token(cmd_line + i,tokn.size, tokn.type);
+			if ((tok->data[0] == '\'') || (tok->data[0] == '"'))
+				remove_all_chars(tok->data, tok->data[0]);
+			add_to_end(&token, tok);
+			i += tokn.size;
 		}
 	}
-	return (list);
+	return (token);
 }

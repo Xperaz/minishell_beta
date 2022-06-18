@@ -5,8 +5,8 @@ FLAGS = -Wall -Wextra -Werror -lreadline
 SRCF = sources/
 
 SRC  = minishell.c checker.c list_utils.c \
-	tokenizer.c toknizer_utils1.c toknizer_utils2.c toknizer_utils3.c \
-	toknizer_utils4.c syntax_validation.c add_flag.c\
+	tokenizer.c toknizer_utils.c \
+	syntax_validation.c add_flag.c\
 
 SRCP = $(addprefix $(SRCF), $(SRC))
 
@@ -17,12 +17,12 @@ NAME = minishell
 all  :$(NAME)
 
 $(NAME) : $(OBJ) 
-		@$(CC) $(FLAGS) ./libft/libft.a $(OBJ) -o $(NAME)
+		@$(CC) $(FLAGS) ./libft/libft.a $(OBJ) -o $(NAME) -lreadline -L$(shell brew --prefix readline)/lib
 		@echo "$(GREEN) " MINISHELL DONE" $(RESET)\n"
 
 %.o : %.c includes/minishell.h
 	@make -C ./libft
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@ 
 	@echo "$(CHANGE)$(GREEN)∰$(RESET)\c"
 
 clean :
