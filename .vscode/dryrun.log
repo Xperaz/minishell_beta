@@ -1,0 +1,37 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/aouhadou/Desktop/minishell_beta'
+make -C ./libft
+ 
+gcc   -c sources/minishell.c -o sources/minishell.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/checker.c -o sources/checker.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/list_utils.c -o sources/list_utils.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/tokenizer.c -o sources/tokenizer.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/toknizer_utils1.c -o sources/toknizer_utils1.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/toknizer_utils2.c -o sources/toknizer_utils2.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/toknizer_utils3.c -o sources/toknizer_utils3.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/toknizer_utils4.c -o sources/toknizer_utils4.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/syntax_validation.c -o sources/syntax_validation.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+make -C ./libft
+gcc   -c sources/add_flag.c -o sources/add_flag.o
+echo "\033[0;35m\033[0;32m∰\033[0m\c"
+gcc  -Wall -Wextra -Werror -lreadline  ./libft/libft.a sources/minishell.o sources/checker.o sources/list_utils.o sources/tokenizer.o sources/toknizer_utils1.o sources/toknizer_utils2.o sources/toknizer_utils3.o sources/toknizer_utils4.o sources/syntax_validation.o sources/add_flag.o -o minishell
+echo "\033[0;32m " MINISHELL DONE" \033[0m\n"
+make: Leaving directory `/Users/aouhadou/Desktop/minishell_beta'
+ 

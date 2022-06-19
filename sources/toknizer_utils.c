@@ -41,3 +41,33 @@ char	*ft_sub_str(const char *src, int len)
 	return (ft_strncpy(substr, src, len));
 }
 
+int	is_two(char *tok, char c)
+{
+	int i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (tok[i])
+	{
+		if (tok[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int	is_quotes(char *tok)
+{
+	if (tok[0] == 39)
+		return (39);
+	else if (tok[0] == 34)
+		return (34);
+	else if (is_two(tok, 39) == 2)
+		return (39);
+	else if (is_two(tok, 34) == 2)
+		return (34);
+	else
+		return (0);
+}
+
