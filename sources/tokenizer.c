@@ -69,8 +69,8 @@ t_token	*ft_tokens(char *cmd_line)
 		{
 			get_next_token(cmd_line + i, &tokn.size, &tokn.type);
 			tok = new_token(cmd_line + i,tokn.size, tokn.type);
-			if ((tok->data[0] == '\'') || (tok->data[0] == '"'))
-				remove_all_chars(tok->data, tok->data[0]);
+			if (is_quotes(tok->data))
+				remove_all_chars(tok->data, is_quotes(tok->data));
 			add_to_end(&token, tok);
 			i += tokn.size;
 		}
