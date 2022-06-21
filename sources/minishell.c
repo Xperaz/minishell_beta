@@ -1,33 +1,23 @@
 
 #include "../includes/minishell.h"
 
+void display(t_cmd *node) {
 
-void display(t_token* node) {
+	t_cmd	*tmp;
+	int i;
 
-	t_token	*tmp;
 	tmp = node;
-    while (tmp)
-	{
-		printf("{%s} => {%d} => |%d|\n", tmp->data, tmp->key, tmp->dq);
-   		tmp = tmp->next;
-	}
-  printf("\n");
-}
-
-/*                         PARSER.                      */
-
-t_cmd	*parser(t_token	*list)
-{
-	t_cmd	*cmds;
-	t_token	*tmp;
-
-	tmp = list;
-	cmds = NULL;
 	while (tmp)
 	{
-		tmp = tmp->next;
+		i = 0;
+		while (tmp->cmd[i])
+		{
+			printf("{%s} ", tmp->cmd[i]);
+			i++;
+		}
+   		tmp = tmp->next;
+		printf("\n");
 	}
-	return(cmds);
 }
 
 /*                         LEXER.                       */
@@ -46,8 +36,9 @@ void	ft_lexer(char *line)
 		rl_on_new_line();
 	}
 	flag_list(list);
-	cmd_list = parser(list);
-	display(list);
+	cmd_list = creat_cmds(list);
+	
+	display(cmd_list);
 }
 
 /* **************************************************** */

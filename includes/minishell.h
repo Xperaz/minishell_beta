@@ -30,7 +30,6 @@ enum e_token_type
 
 typedef struct tokens {
 	int				size;
-	int				dq;
 	t_token_type	type;
 	char			*data;
 	int				key;
@@ -46,6 +45,11 @@ typedef struct command {
 	struct	command *next;
 } t_cmd;
 
+// typedef struct merging_tokens {
+// 	char    *merg;
+// 	struct	command *next;
+// } t_merge;
+
 //checker functions
 void	ft_check(char *command);
 int     command_checker(char *command);
@@ -57,9 +61,12 @@ void    list_clear(t_token** head_ref);
 void	delete_node(t_token** head, t_token *del_node);
 int		lstsize(t_token *lst);
 
+void    add_cmd_to_end(t_cmd** command, char **new_data);
+t_cmd	*new_cmd_token(char **data);
+
 t_token	*new_token(char *data, int size, t_token_type type);
 static t_token_type	token_found(const char *cmd_line);
-int	get_word_token_size(char *cmd_line);
+int		get_word_token_size(char *cmd_line);
 void	get_next_token(char *cmd_line, int *size, t_token_type *type);
 
 //tokenizer_utils
@@ -79,5 +86,10 @@ int		wich_redirection(char *red);
 int		invalid_token(char *node);
 int		is_operator(char *tok);
 int		syntax_validation(t_token *list);
+
+//parser
+t_cmd	*creat_cmds(t_token *node);
+char	**remplir_tab(t_token *node, int start);
+int		count_size(t_token	*node, int start);
 
 #endif
