@@ -29,19 +29,6 @@ t_token	*new_token(char *data, int size, t_token_type type)
 	return (new);
 }
 
-void add_front(t_token** head, char *data)
-{
-	t_token*	newNode;
-	
-	newNode = (t_token*)malloc(sizeof(t_token));
-	newNode->data = data;
-	newNode->next = (*head);
-	newNode->prev = NULL;
-	if ((*head) != NULL)
-		(*head)->prev = newNode;
-	(*head) = newNode;
-}
-
 void	add_to_end(t_token** token, t_token *new)
 {
     t_token	*tmp;
