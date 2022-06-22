@@ -76,7 +76,7 @@ void	expand_dollar(t_cmd *node)
 		i = 0;
 		while (node->cmd[i])
 		{
-			if (is_dollar(node->cmd[i]) >= 0)
+			if (is_dollar(node->cmd[i]) >= 0 && node->cmd[i][0] != '\'')
 			{
 				sub = dollar_substr(node->cmd[i]);
 				env = dollar_substr1(node->cmd[i]);

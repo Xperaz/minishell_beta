@@ -26,6 +26,7 @@ enum e_token_type
 # include	<readline/readline.h>
 # include	<readline/history.h>
 # include	<errno.h>
+#include 	<fcntl.h>
 # include	"../libft/libft.h"
 
 typedef struct tokens {
@@ -42,6 +43,7 @@ typedef struct command {
 	char    **cmd;
 	int		infile;
 	int		outfile;
+	int		flag;
 	struct	command *next;
 } t_cmd;
 
