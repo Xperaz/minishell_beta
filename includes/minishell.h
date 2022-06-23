@@ -43,6 +43,9 @@ typedef struct command {
 	char    **cmd;
 	int		infile;
 	int		outfile;
+	int		herdoc;
+	char 	**delims;
+	char	*del;
 	int		flag;
 	struct	command *next;
 } t_cmd;
@@ -113,5 +116,10 @@ void				open_redirect_out(char *fl, t_cmd *node);
 void				ft_input_file(t_cmd *node, int *i);
 int					ft_open(t_cmd *node);
 void				open_files(t_cmd *node);
+
+// herduq
+
+char				*ft_strjoin_1(char *s1, char *s2);
+void				create_delimters(t_cmd *node, int *i);
 
 #endif

@@ -1,31 +1,5 @@
 #include "../includes/minishell.h"
 
-int	is_redirection(char *tok)
-{
-	if (!ft_strncmp(tok, ">", 1) || !ft_strncmp(tok, "<", 1)
-			|| !ft_strncmp(tok, ">>", 2) || !ft_strncmp(tok, "<<", 2))
-			return (1);
-	return (0);	
-}
-
-int	is_file(t_cmd *node)
-{
-	int	i;
-
-	while (node)
-	{
-		i = 0;
-		while (node->cmd[i])
-		{
-			if (is_redirection(node->cmd[i]))
-				return (i);
-			i++;
-		}
-		node = node->next;
-	}
-	return (i);
-}
-
 int	open_redirect_input(char *file, t_cmd *node)
 {
 	int	fd;

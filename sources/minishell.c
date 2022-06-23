@@ -12,8 +12,19 @@ void display(t_cmd *node) {
 		i = 0;
 		while (tmp->cmd[i])
 		{
-			printf("{%s} ", tmp->cmd[i]);
+			printf("{%s} => |%d|", tmp->cmd[i], tmp->herdoc);
+			
 			i++;
+		}
+		if (node->herdoc)
+		{
+			i = 0;
+		printf("\n");
+		while (tmp->delims[i])
+		{
+			printf("|%s|", tmp->delims[i]);
+			i++;
+		}
 		}
    		tmp = tmp->next;
 		printf("\n");
@@ -42,8 +53,9 @@ void	ft_lexer(char *line)
 	cmd_list = creat_cmds(list);
 	expand_dollar(cmd_list);
 	remove_quotes(cmd_list);
-	//if (is_file(cmd_list))
-		open_files(cmd_list);
+	open_files(cmd_list);
+	// if (cmd_list->herdoc == 1)
+	// 	cmd_list->delims = ft_split(cmd_list->del, ' ');
 	display(cmd_list);
 }
 
