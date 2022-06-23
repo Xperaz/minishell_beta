@@ -98,35 +98,13 @@ void	ft_open(t_cmd *node)
 	}
 }
 
-void	open_files(t_cmd	*node)
+void	open_files(t_cmd *node)
 {
-	int	i;
-
 	node->infile = 0;
 	node->outfile = 1;
 	while (node)
 	{
 		ft_open(node);
-		// i = -1;
-		// while (node->cmd[++i])
-		// {
-		// 	if (!ft_strncmp(node->cmd[i], ">", 1))
-		// 	{
-		// 		open_redirect_out(node->cmd[i + 1], node);
-		// 		ft_free(node->cmd[i + 1], node->cmd[i]);
-		// 	}
-		// 	else if (!ft_strncmp(node->cmd[i], ">>", 2))
-		// 	{
-		// 		open_app_redirect_out(node->cmd[i + 1], node);
-		// 		ft_free(node->cmd[i + 1], node->cmd[i]);
-		// 	}
-		// 	else if (!ft_strncmp(node->cmd[i], "<", 1))
-		// 	{
-		// 		if (!open_redirect_input(node->cmd[i + 1], node))
-		// 			break;
-		// 		ft_free(node->cmd[i + 1], node->cmd[i]);
-		// 	}
-		// }
 		node = node->next;
 	}
 }
@@ -150,6 +128,7 @@ void	ft_lexer(char *line)
 	cmd_list = creat_cmds(list);
 	expand_dollar(cmd_list);
 	open_files(cmd_list);
+	remove_quotes(cmd_list);
 	display(cmd_list);
 }
 

@@ -89,6 +89,7 @@ int					syntax_validation(t_token *list);
 t_cmd				*creat_cmds(t_token *node);
 char				**remplir_tab(t_token *node, int start);
 int					count_size(t_token	*node, int start);
+void				remove_quotes(t_cmd *node);
 
 //epand dollar
 void				expand_dollar(t_cmd *node);
