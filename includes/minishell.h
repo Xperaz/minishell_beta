@@ -61,6 +61,8 @@ int					lstsize(t_token *lst);
 //cmds list_utls
 void    			add_cmd_to_end(t_cmd** command, char **new_data);
 t_cmd				*new_cmd_token(char **data);
+void				clear_cmds(t_cmd** head_ref);
+void				delete_cmd(t_cmd** head, t_cmd *del_node);
 
 t_token				*new_token(char *data, int size, t_token_type type);
 static t_token_type	token_found(const char *cmd_line);
