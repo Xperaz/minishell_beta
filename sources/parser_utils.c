@@ -86,5 +86,4 @@ void	remove_quotes(t_cmd *node)
 		}
 		node = node->next;
 	}
-	
 }

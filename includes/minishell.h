@@ -43,6 +43,9 @@ typedef struct command {
 	char    **cmd;
 	int		infile;
 	int		outfile;
+	int		herdoc;
+	char 	**delims;
+	char	*del;
 	int		flag;
 	struct	command *next;
 } t_cmd;
@@ -102,5 +105,21 @@ char				*dollar_substr(char *str);
 int					is_dollar(char *str);
 int					get_env_end(char *str);
 const char			*ft_strstr(const char *str, const char *to_find);
+
+//files creation
+void				ft_free(char *s1, char *s2);
+int					is_redirection(char *tok);
+int					is_file(t_cmd *node);
+int					open_redirect_input(char *file, t_cmd *node);
+void				open_app_redirect_out(char *file, t_cmd *node);
+void				open_redirect_out(char *fl, t_cmd *node);
+void				ft_input_file(t_cmd *node, int *i);
+int					ft_open(t_cmd *node);
+void				open_files(t_cmd *node);
+
+// herduq
+
+char				*ft_strjoin_1(char *s1, char *s2);
+void				create_delimters(t_cmd *node, int *i);
 
 #endif

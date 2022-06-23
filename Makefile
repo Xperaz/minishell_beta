@@ -8,7 +8,8 @@ SRC  = minishell.c checker.c list_utils.c \
 	tokenizer.c toknizer_utils.c \
 	syntax_validation.c add_flag.c \
 	cmd_list_utils.c parser.c parser_utils.c \
-	expander.c expander_utils.c
+	expander.c expander_utils.c files_creation.c \
+	files_creation_utils.c herduq_utils.c
 
 SRCP = $(addprefix $(SRCF), $(SRC))
 
