@@ -70,3 +70,21 @@ char	**remplir_tab(t_token *node, int start)
 	tab[i] = NULL;
 	return(tab);
 }
+
+void	remove_quotes(t_cmd *node)
+{
+	int	i;
+
+	while (node)
+	{
+		i = 0;
+		while (node->cmd[i])
+		{
+			if (is_quotes(node->cmd[i]))
+				remove_all_chars(node->cmd[i], is_quotes(node->cmd[i]));
+			i++;
+		}
+		node = node->next;
+	}
+	
+}

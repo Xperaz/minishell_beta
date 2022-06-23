@@ -28,23 +28,45 @@ void	ft_free(char *s1, char *s2)
 	ft_bzero(s2, ft_strlen(s2));
 }
 
+int	is_redirection(char *tok)
+{
+	if (!ft_strncmp(tok, ">", 1) || !ft_strncmp(tok, "<", 1)
+			|| !ft_strncmp(tok, ">>", 2) || !ft_strncmp(tok, "<<", 2))
+			return (1);
+	return (0);	
+}
+
+int	is_file(t_cmd *node)
+{
+	int	i;
+
+	while (node)
+	{
+		i = 0;
+		while (node->cmd[i])
+		{
+			if (is_redirection(node->cmd[i]))
+				return (i);
+			i++;
+		}
+		node = node->next;
+	}
+	return (i);
+}
+
 int	open_redirect_input(char *file, t_cmd *node)
 {
 	int	fd;
 	int	flag;
 
-	flag = 1;
+	flag  = 1;
 	if ((access(file, F_OK)) == 0)
 	{
 		fd = open(file, O_WRONLY,  S_IRWXU);
 		node->infile = fd;
 	}
 	else
-	{
 		flag = 0;
-		printf("%s: No such file or directory\n", file);
-		rl_on_new_line();
-	}
 	return (flag);
 }
 
@@ -55,12 +77,12 @@ void	open_app_redirect_out(char *file, t_cmd *node)
 	if ((!access(file, F_OK)) == 0)
 	{
 		fd = open(file, O_WRONLY,  S_IWUSR);
-		node->infile = fd;
+		node->outfile = fd;
 	}
 	else
 	{
 		fd = open(file, O_CREAT,  S_IWUSR);
-		node->infile = fd;
+		node->outfile = fd;
 	}
 }
 
@@ -69,14 +91,15 @@ void	open_redirect_out(char *fl, t_cmd *node)
 	int fd;
 
 	fd = open(fl, O_CREAT, S_IRWXU);
-	node->infile = fd;
+	node->outfile = fd;
 }
 
-void	ft_open(t_cmd *node)
+int ft_open(t_cmd *node)
 {
 	int i;
 
 	i = -1;
+	int flag = 1;
 	while (node->cmd[++i])
 	{
 		if (!ft_strncmp(node->cmd[i], ">", 1))
@@ -92,41 +115,33 @@ void	ft_open(t_cmd *node)
 		else if (!ft_strncmp(node->cmd[i], "<", 1))
 		{
 			if (!open_redirect_input(node->cmd[i + 1], node))
-				break;
+			{
+				ft_bzero(node->cmd[i], ft_strlen(node->cmd[i]));
+				return (i + 2);
+			}
 			ft_free(node->cmd[i + 1], node->cmd[i]);
 		}
 	}
+	return(-1);
 }
 
-void	open_files(t_cmd	*node)
+void	open_files(t_cmd *node)
 {
-	int	i;
+	int	flag;
 
 	node->infile = 0;
 	node->outfile = 1;
 	while (node)
 	{
-		ft_open(node);
-		// i = -1;
-		// while (node->cmd[++i])
-		// {
-		// 	if (!ft_strncmp(node->cmd[i], ">", 1))
-		// 	{
-		// 		open_redirect_out(node->cmd[i + 1], node);
-		// 		ft_free(node->cmd[i + 1], node->cmd[i]);
-		// 	}
-		// 	else if (!ft_strncmp(node->cmd[i], ">>", 2))
-		// 	{
-		// 		open_app_redirect_out(node->cmd[i + 1], node);
-		// 		ft_free(node->cmd[i + 1], node->cmd[i]);
-		// 	}
-		// 	else if (!ft_strncmp(node->cmd[i], "<", 1))
-		// 	{
-		// 		if (!open_redirect_input(node->cmd[i + 1], node))
-		// 			break;
-		// 		ft_free(node->cmd[i + 1], node->cmd[i]);
-		// 	}
-		// }
+		flag = ft_open(node);
+		if (flag >= 0)
+		{
+			while (node->cmd[flag])
+			{
+				ft_bzero(node->cmd[flag], ft_strlen(node->cmd[flag]));
+				flag++;
+			}
+		}
 		node = node->next;
 	}
 }
@@ -149,7 +164,9 @@ void	ft_lexer(char *line)
 	flag_list(list);
 	cmd_list = creat_cmds(list);
 	expand_dollar(cmd_list);
-	open_files(cmd_list);
+	remove_quotes(cmd_list);
+	//if (is_file(cmd_list))
+		open_files(cmd_list);
 	display(cmd_list);
 }
 
