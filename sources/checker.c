@@ -1,11 +1,16 @@
 #include "../includes/minishell.h"
 
+void	print_error()
+{
+	printf("%s\n", errors);
+	rl_on_new_line();
+}
 void	ft_check(char *command)
 {
-	if (!command || !strncmp(command, "exit", 4))
+	if (!strncmp(command, "exit", 4))
 	{
 		printf("exit");
-		exit (0);
+		exit(1);
 	}
 	else if (command[0] != '\0')
 		add_history(command);
@@ -29,9 +34,9 @@ int	command_checker(char *command)
 		else if (quotes == 1 && command[i] == '\'')
 			quotes = 0;
 		else if (quotes == 0 && (command[i] == '\\' || command[i] == ';'))
-			return (printf("%s", "Error"), EXIT_FAILURE);
+			print_error();
 	}
 	if (quotes != 0)
-		return (printf("%s\n", "Error"), -1);
+		print_error();
 	return (0);
 }

@@ -42,20 +42,16 @@ void	ft_lexer(char *line)
 	char	*cmd;
 	t_cmd	*cmd_list;
 
-	cmd = ft_strtrim(line, " ");
+	if (line)
+		cmd = ft_strtrim(line, " ");
 	list = ft_tokens(cmd);
 	if (!syntax_validation(list))
-	{
-		printf("Error occured\n");
-		rl_on_new_line();
-	}
+		print_error();
 	flag_list(list);
 	cmd_list = creat_cmds(list);
 	expand_dollar(cmd_list);
 	remove_quotes(cmd_list);
 	open_files(cmd_list);
-	// if (cmd_list->herdoc == 1)
-	// 	cmd_list->delims = ft_split(cmd_list->del, ' ');
 	display(cmd_list);
 }
 
@@ -66,12 +62,17 @@ void	ft_lexer(char *line)
 void	ft_prompt(void)
 {
 	char	*command;
+
 	while (1)
 	{
 		command = readline("$> ");
+		if (!command)
+			ctrl_d();
 		ft_check(command);
-		if (command_checker(command) != 0)
-			break ;
+		if (!ft_strlen(command))
+			continue;
+		if (command_checker(command))
+			break;
 		ft_lexer(command);
 		free (command);
 	}
@@ -81,8 +82,11 @@ void	ft_prompt(void)
 /*                        🅼🅰🅸🅽                       */
 /* **************************************************** */
 
+
 int	main(void)
 {
+	signal(SIGINT, handle_sig);
+	signal(SIGQUIT, handle_sig);
 	ft_prompt();
 	return (0);
 }
