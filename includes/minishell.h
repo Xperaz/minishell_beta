@@ -20,13 +20,16 @@ enum e_token_type
 	D_QUOTES = 10,
 };
 
+#define errors	"shell$> : syntax error unexpected token"
+
 # include	<stdio.h>
 # include	<stdlib.h>
 # include	<string.h>
 # include	<readline/readline.h>
 # include	<readline/history.h>
 # include	<errno.h>
-#include 	<fcntl.h>
+# include 	<fcntl.h>
+# include 	<signal.h> 
 # include	"../libft/libft.h"
 
 typedef struct tokens {
@@ -54,6 +57,7 @@ typedef struct command {
 //checker functions
 void				ft_check(char *command);
 int     			command_checker(char *command);
+void				print_error();
 
 //lists_utils_functions
 void   				add_front(t_token** head, char *data);
@@ -118,8 +122,11 @@ int					ft_open(t_cmd *node);
 void				open_files(t_cmd *node);
 
 // herduq
-
 char				*ft_strjoin_1(char *s1, char *s2);
 void				create_delimters(t_cmd *node, int *i);
+
+//signals
+void				handle_sig(int sig);
+void				ctrl_d();
 
 #endif
