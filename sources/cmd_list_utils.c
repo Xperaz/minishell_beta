@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_list_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:55:51 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 13:55:52 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 t_cmd	*last_cmd(t_cmd *token)
@@ -69,4 +81,19 @@ void	clear_cmds(t_cmd** head_ref)
 		delete_cmd(head_ref, temp);
 		temp = next;
 	}
+}
+
+int	lstsize2(t_cmd *lst)
+{
+	int		i;
+	t_cmd	*new;
+
+	new = lst;
+	i = 0;
+	while (new != NULL)
+	{
+		i++;
+		new = new->next;
+	}
+	return (i);
 }

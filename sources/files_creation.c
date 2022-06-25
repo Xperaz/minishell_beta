@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   files_creation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:56:13 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 18:17:47 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	ft_free(char *s1, char *s2)
@@ -16,11 +28,12 @@ int ft_open(t_cmd *node)
 	node->del = NULL;
 	while (node->cmd[++i])
 	{
-		if ((!ft_strncmp(node->cmd[i], ">", 1)) || (!ft_strncmp(node->cmd[i], ">>", 2)))
+		if ((!ft_strcmp1(node->cmd[i], ">")) || (!ft_strcmp1(node->cmd[i], ">>"))
+			|| (!ft_strcmp1(node->cmd[i], "<>")))
 			ft_input_file(node, &i);
-		else if (!ft_strncmp(node->cmd[i], "<<", 2))
+		else if (!ft_strcmp1(node->cmd[i], "<<"))
 			create_delimters(node, &i);
-		else if (!ft_strncmp(node->cmd[i], "<", 1))
+		else if (!ft_strcmp1(node->cmd[i], "<"))
 		{
 			if (!open_redirect_input(node->cmd[i + 1], node))
 			{
@@ -61,8 +74,9 @@ void	open_files(t_cmd *node)
 
 int	is_redirection(char *tok)
 {
-	if (!ft_strncmp(tok, ">", 1) || !ft_strncmp(tok, "<", 1)
-			|| !ft_strncmp(tok, ">>", 2) || !ft_strncmp(tok, "<<", 2))
+	if (!ft_strcmp1(tok, ">") || !ft_strcmp1(tok, "<")
+			|| !ft_strcmp1(tok, ">>") || !ft_strcmp1(tok, "<<")
+			|| !ft_strcmp1(tok, "<>"))
 			return (1);
 	return (0);	
 }
@@ -82,5 +96,5 @@ int	is_file(t_cmd *node)
 		}
 		node = node->next;
 	}
-	return (i);
+	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 18:27:00 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -13,16 +25,15 @@ void display(t_cmd *node) {
 		while (tmp->cmd[i])
 		{
 			printf("{%s} => |%d|", tmp->cmd[i], tmp->herdoc);
-			
 			i++;
 		}
 		if (node->herdoc)
 		{
-			i = 0;
+		i = 0;
 		printf("\n");
 		while (tmp->delims[i])
 		{
-			printf("|%s|", tmp->delims[i]);
+			printf("|%s| ", tmp->delims[i]);
 			i++;
 		}
 		}
@@ -33,6 +44,65 @@ void display(t_cmd *node) {
 
 /*                        file opens                    */
 
+// void    free_nfd(int **nfd)
+// {
+//     int    i;
+
+//     i = 0;
+//     while (nfd[i++])
+//         free(nfd[i]);
+//     free(nfd);
+// }
+
+// int    init_pipe(t_cmd *cur, int **nfd, int i)
+// {
+//     nfd[i] = malloc(sizeof(int) * (2));
+//     if (nfd[i] == NULL)
+//         return (0);
+//     if (pipe(nfd[i]) == -1)
+//         return (0);
+//     if (i == 0)
+//         cur->infile = 0;
+//     else
+//         cur->infile = nfd[i - 1][0];
+//     if (cur->next == NULL)
+//     {
+//         close(nfd[i][0]);
+//         close(nfd[i][1]);
+//         cur->outfile = 1;
+//     }
+//     else
+// 		cur->outfile = nfd[i][1];
+//     return (0);
+// }
+
+// int    open_pipe(t_cmd *cmd, int len)
+// {
+//     int        **nfd;
+//     t_cmd      *cur;
+//     int        ret;
+//     int        i;
+
+//     i = 0;
+//     cur = cmd;
+//     nfd = (int **)malloc(sizeof(int) * (len + 1));
+//     if (nfd == NULL)
+//         return (50);
+//     nfd[len] = 0;
+//     while (cur)
+//     {
+//         ret = init_pipe(cur, nfd, i);
+//         if (ret != 0)
+//         {
+//             free_nfd(nfd);
+//             return (ret);
+//         }
+//         cur = cur->next;
+//         i++;
+//     }
+//     free_nfd(nfd);
+//     return (0);
+// }
 
 /*                         LEXER.                       */
 
@@ -46,13 +116,20 @@ void	ft_lexer(char *line)
 		cmd = ft_strtrim(line, " ");
 	list = ft_tokens(cmd);
 	if (!syntax_validation(list))
-		print_error();
-	flag_list(list);
-	cmd_list = creat_cmds(list);
-	expand_dollar(cmd_list);
-	remove_quotes(cmd_list);
-	open_files(cmd_list);
-	display(cmd_list);
+	{
+		printf("*** %d ***\n", syntax_validation(list));
+		print_error(list);
+	}
+	else
+	{
+		cmd_list = creat_cmds(list);
+		expand_dollar(cmd_list);
+		remove_quotes(cmd_list);
+		//if (lstsize2(cmd_list) > 1)
+			//open_pipe(cmd_list, lstsize2(cmd_list));
+		open_files(cmd_list);
+		display(cmd_list);
+	}
 }
 
 /* **************************************************** */
