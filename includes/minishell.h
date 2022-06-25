@@ -5,8 +5,6 @@
 
 typedef enum e_token_type		t_token_type;
 
-enum coammands_list {COMMAND = 1, WORD, O_REDIRECTION, I_REDIRECTION, 
-					ASO, HERDOC, DELIMTER, OPTION, FL, DOLLAR, PIPE, DOUBLE};//ASO/ASI : appending standard output/input (>>/<<)
 enum e_token_type
 {
 	TOKEN_WORD,
@@ -17,6 +15,7 @@ enum e_token_type
 	AS_output,
 	TOKEN_START,
 	TOKEN_LINE,
+	F_OUTPUT,
 	D_QUOTES = 10,
 };
 
@@ -58,6 +57,7 @@ typedef struct command {
 void				ft_check(char *command);
 int     			command_checker(char *command);
 void				print_error();
+int					ft_strcmp1(char *s1, char *s2);
 
 //lists_utils_functions
 void   				add_front(t_token** head, char *data);
@@ -70,6 +70,7 @@ void    			add_cmd_to_end(t_cmd** command, char **new_data);
 t_cmd				*new_cmd_token(char **data);
 void				clear_cmds(t_cmd** head_ref);
 void				delete_cmd(t_cmd** head, t_cmd *del_node);
+int					lstsize2(t_cmd *lst);
 
 t_token				*new_token(char *data, int size, t_token_type type);
 static t_token_type	token_found(const char *cmd_line);

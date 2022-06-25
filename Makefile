@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/25 13:56:52 by aouhadou          #+#    #+#              #
+#    Updated: 2022/06/25 13:57:20 by aouhadou         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc 
 
 FLAGS = -Wall -Wextra -Werror -lreadline 
@@ -6,10 +18,10 @@ SRCF = sources/
 
 SRC  = minishell.c checker.c list_utils.c \
 	tokenizer.c toknizer_utils.c \
-	syntax_validation.c add_flag.c \
+	syntax_validation.c \
 	cmd_list_utils.c parser.c parser_utils.c \
 	expander.c expander_utils.c files_creation.c \
-	files_creation_utils.c herduq_utils.c signals.c \
+	files_creation_utils.c heredoc_utils.c signals.c \
 
 SRCP = $(addprefix $(SRCF), $(SRC))
 

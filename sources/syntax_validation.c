@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax_validation.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:56:40 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 20:03:55 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	check_is_var(char *var)
@@ -21,13 +33,16 @@ int	invalid_token(char *node)
 	int	i;
 
 	i = 0;
-	while (node[i])
+	if ((node[0] != '"' && node[0] != '\''))
 	{
-		if (node[i] == '(' || node[i] == ')')
-			return (0);
-		i++;
+		while (node[i])
+		{
+			if ((node[i] == '(' || node[i] == ')'))
+				return (0);
+			i++;
+		}
 	}
-	if (!ft_strncmp(node, "()", 2) || !ft_strncmp(node, "||", 2)
+	else if (!ft_strncmp(node, "()", 2) || !ft_strncmp(node, "||", 2)
 		|| !ft_strncmp(node, "&&", 2))
 			return (0);
 	return (1);
@@ -35,13 +50,19 @@ int	invalid_token(char *node)
 
 int	is_operator(char *tok)
 {
-	if (!ft_strncmp(tok, ">", 1) || !ft_strncmp(tok, "<", 1)
-			|| !ft_strncmp(tok, ">>", 2) || !ft_strncmp(tok, "<<", 2)
-			|| !ft_strncmp(tok, "|", 2))
+	if (!ft_strcmp1(tok, ">") || !ft_strcmp1(tok, "<")
+			|| !ft_strcmp1(tok, ">>") || !ft_strcmp1(tok, "|")
+			|| !ft_strcmp1(tok, "<>"))
 			return (1);
 	return (0);	
 }
 
+int	is_heredoc(char *tok)
+{
+	if (!ft_strcmp1(tok, "<<"))
+		return (1);
+	return (0);
+}
 
 int		syntax_validation(t_token *list)
 {
@@ -51,15 +72,13 @@ int		syntax_validation(t_token *list)
 	int flag = 0;
 	while (tmp != NULL)
 	{
-		if (tmp->prev != NULL)
-		{
-			if (!ft_strncmp(tmp->prev->data, "env", 3) && check_is_var(tmp->data))
-				remove_all_chars(tmp->data, check_is_var(tmp->data));
-		}
 		if (!invalid_token(tmp->data))
 			return (0);
 		else if (is_operator(tmp->data) &&
-			(tmp->next == NULL || is_operator(tmp->next->data)))
+			(tmp->next == NULL || is_operator(tmp->next->data) || tmp->prev == NULL))
+			return (0);
+		else if (is_heredoc(tmp->data) &&
+			(tmp->next == NULL || is_operator(tmp->next->data) || is_heredoc(tmp->next->data)))
 			return (0);
 		tmp = tmp->next;
 	}

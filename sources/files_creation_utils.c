@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   files_creation_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:56:06 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 18:14:57 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	open_redirect_input(char *file, t_cmd *node)
@@ -42,12 +54,12 @@ void	open_redirect_out(char *fl, t_cmd *node)
 
 void	ft_input_file(t_cmd *node, int *i)
 {
-	if (!ft_strncmp(node->cmd[*i], ">", 1))
+	if (!ft_strcmp1(node->cmd[*i], ">") || !ft_strcmp1(node->cmd[*i], "<>"))
 	{
 			open_redirect_out(node->cmd[*i + 1], node);
 			ft_free(node->cmd[*i + 1], node->cmd[*i]);
 	}
-	else if (!ft_strncmp(node->cmd[*i], ">>", 2))
+	else if (!ft_strcmp1(node->cmd[*i], ">>"))
 	{
 			open_app_redirect_out(node->cmd[*i + 1], node);
 			ft_free(node->cmd[*i + 1], node->cmd[*i]);

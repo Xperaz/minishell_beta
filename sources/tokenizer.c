@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:56:43 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 18:32:09 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 static t_token_type	token_found(const char *cmd_line)
 {
 	if (ft_strncmp(cmd_line, "<<", 2) == 0)
 		return (AS_input);
+	else if (ft_strncmp(cmd_line, "<>", 2) == 0)
+		return (F_OUTPUT);
 	else if (ft_strncmp(cmd_line, ">>", 2) == 0)
 		return (AS_output);
 	else if (ft_strncmp(cmd_line, "<", 1) == 0)
@@ -18,7 +32,7 @@ static t_token_type	token_found(const char *cmd_line)
 
 int	get_word_token_size(char *cmd_line)
 {
-	t_token	*tmp;
+	//t_token	*tmp;
 	size_t	i;
 	int		double_quote;
 	int		single_quote;
@@ -45,7 +59,7 @@ void	get_next_token(char *cmd_line, int *size, t_token_type *type)
 	if (*type != TOKEN_WORD)
 	{
 		*size = 1;
-		if (*type == AS_input || *type == AS_output)
+		if (*type == AS_input || *type == AS_output || *type == F_OUTPUT)
 			*size = 2;
 	}
 	else

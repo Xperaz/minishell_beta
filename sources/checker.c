@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:55:41 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 16:02:29 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "../includes/minishell.h"
 
 void	print_error()
@@ -7,7 +20,7 @@ void	print_error()
 }
 void	ft_check(char *command)
 {
-	if (!strncmp(command, "exit", 4))
+	if (!ft_strcmp1(command, "exit"))
 	{
 		printf("exit");
 		exit(1);

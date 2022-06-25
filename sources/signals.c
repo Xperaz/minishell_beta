@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 13:56:36 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/25 13:56:37 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	handle_sig(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n");
+		printf("\033[K$>\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
