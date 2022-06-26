@@ -6,13 +6,13 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:43 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 18:32:09 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:17:22 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static t_token_type	token_found(const char *cmd_line)
+t_token_type	token_found(const char *cmd_line)
 {
 	if (ft_strncmp(cmd_line, "<<", 2) == 0)
 		return (AS_input);
@@ -32,7 +32,6 @@ static t_token_type	token_found(const char *cmd_line)
 
 int	get_word_token_size(char *cmd_line)
 {
-	//t_token	*tmp;
 	size_t	i;
 	int		double_quote;
 	int		single_quote;

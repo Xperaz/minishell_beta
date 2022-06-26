@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/26 15:46:02 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/26 15:48:33 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
-
 # define MINISHELL_H
 
 typedef enum e_token_type		t_token_type;
@@ -19,11 +30,10 @@ enum e_token_type
 	D_QUOTES = 10,
 };
 
-#define errors	"shell$> : syntax error unexpected token"
+# define errors	"shell$> : syntax error unexpected token"
 
 # include	<stdio.h>
 # include	<stdlib.h>
-# include	<string.h>
 # include	<readline/readline.h>
 # include	<readline/history.h>
 # include	<errno.h>
@@ -73,7 +83,7 @@ void				delete_cmd(t_cmd** head, t_cmd *del_node);
 int					lstsize2(t_cmd *lst);
 
 t_token				*new_token(char *data, int size, t_token_type type);
-static t_token_type	token_found(const char *cmd_line);
+t_token_type	token_found(const char *cmd_line);
 int					get_word_token_size(char *cmd_line);
 void				get_next_token(char *cmd_line, int *size, t_token_type *type);
 

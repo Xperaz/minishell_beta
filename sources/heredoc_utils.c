@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:18 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 14:13:35 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:04:22 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strjoin_1(char *s1, char *s2)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	char	*ptr;
 
 	if (s1 == NULL)
