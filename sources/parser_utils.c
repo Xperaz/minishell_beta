@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:30 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 19:01:00 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:23:41 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	remove_quotes(t_cmd *node)
 		{
 			if (is_quotes(node->cmd[i]))
 			{
-				if (!invalid_cmd(node->cmd[i]))
+				if (!invalid_cmd(node->cmd[i]) && node->cmd[i - 1] == 0)
 					return (0);
 				remove_all_chars(node->cmd[i], is_quotes(node->cmd[i]));
 			}
