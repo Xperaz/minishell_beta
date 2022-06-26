@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 11:36:07 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:48:34 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ void display(t_cmd *node) {
 
 /*                         LEXER.                       */
 
-void	ft_lexer(char *line)
+t_token	*ft_lexer(char *line)
 {
 	t_token	*list;
 	char	*cmd;
-	t_cmd	*cmd_list;
 
 	if (line)
 		cmd = ft_strtrim(line, " ");
@@ -57,24 +56,31 @@ void	ft_lexer(char *line)
 	{
 		list_clear(&list);
 		print_error();
-		return ;
+		return (NULL);
 	}
-	else
-	{
-		cmd_list = creat_cmds(list);
-		list_clear(&list);
-		expand_dollar(cmd_list);
-		open_files(cmd_list);
-		if (!remove_quotes(cmd_list))
-		{
-			clear_cmds(&cmd_list);
-			print_error(list);
-			return ;
-		}
-		display(cmd_list);
-	}
+	return (list);
 }
 
+t_cmd	*parser(char *line)
+{
+	t_token	*list;
+	t_cmd	*cmd_list;
+	
+	list = ft_lexer(line);
+	if (!list)
+		return (NULL);
+	cmd_list = creat_cmds(list);
+	list_clear(&list);
+	expand_dollar(cmd_list);
+	open_files(cmd_list);
+	if (!remove_quotes(cmd_list))
+	{
+		clear_cmds(&cmd_list);
+		print_error(list);
+		return (NULL);
+	}
+	return (cmd_list);
+}
 
 /* **************************************************** */
 /*                🆁🅴🅰🅳_🅲🅾🅼🅼🅰🅽🅳                   */
@@ -83,6 +89,7 @@ void	ft_lexer(char *line)
 void	ft_prompt(void)
 {
 	char	*command;
+	t_cmd	*cmds;
 
 	while (1)
 	{
@@ -94,7 +101,8 @@ void	ft_prompt(void)
 			continue;
 		if (command_checker(command))
 			break;
-		ft_lexer(command);
+		cmds = parser(command);
+		display(cmds);
 		free (command);
 	}
 }
