@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:40 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 20:38:34 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:03:19 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,12 @@ int		syntax_validation(t_token *list)
 	t_token	*tmp;
 
 	tmp = list;
-	int flag = 0;
 	while (tmp != NULL)
 	{
 		if (!invalid_token(tmp->data))
 			return (0);
 		else if (is_operator(tmp->data) &&
-			(tmp->next == NULL || is_operator(tmp->next->data) || tmp->prev == NULL))
+			(tmp->next == NULL || !ft_strcmp1(tmp->next->data, "|")))
 			return (0);
 		else if (is_heredoc(tmp->data) &&
 			(tmp->next == NULL || is_operator(tmp->next->data) || is_heredoc(tmp->next->data)))

@@ -6,13 +6,13 @@
 #    By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/25 13:56:52 by aouhadou          #+#    #+#              #
-#    Updated: 2022/06/25 13:57:20 by aouhadou         ###   ########.fr        #
+#    Updated: 2022/06/26 15:16:17 by aouhadou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-FLAGS = -Wall -Wextra -Werror -lreadline 
+FLAGS = -Wall -Wextra -Werror
 
 SRCF = sources/
 
@@ -37,7 +37,7 @@ $(NAME) : $(OBJ)
 
 %.o : %.c includes/minishell.h
 	@make -C ./libft
-	@$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@ 
+	@$(CC) $(FLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@ 
 	@echo "$(CHANGE)$(GREEN)∰$(RESET)\c"
 
 clean :

@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 12:48:34 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:01:24 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ t_token	*ft_lexer(char *line)
 	t_token	*list;
 	char	*cmd;
 
-	if (line)
-		cmd = ft_strtrim(line, " ");
+	cmd = ft_strtrim(line, " ");
 	list = ft_tokens(cmd);
 	if (!syntax_validation(list))
 	{
