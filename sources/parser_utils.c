@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:30 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 13:56:31 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/25 20:41:20 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,32 @@ char	**remplir_tab(t_token *node, int start)
 	return(tab);
 }
 
-void	remove_quotes(t_cmd *node)
+int have_option(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '-')
+			return (1);
+		i++;
+	}
+	
+	return (0);
+}
+
+int	invalid_cmd(char *cmd)
+{
+	if (have_option(cmd))
+	{
+		if ((!access(cmd, F_OK)) == 0)
+			return (0);
+	}
+	return (1);
+}
+
+int	remove_quotes(t_cmd *node)
 {
 	int	i;
 
@@ -93,9 +118,14 @@ void	remove_quotes(t_cmd *node)
 		while (node->cmd[i])
 		{
 			if (is_quotes(node->cmd[i]))
+			{
+				if (!invalid_cmd(node->cmd[i]))
+					return (0);
 				remove_all_chars(node->cmd[i], is_quotes(node->cmd[i]));
+			}
 			i++;
 		}
 		node = node->next;
 	}
+	return (1);
 }
