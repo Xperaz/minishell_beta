@@ -12,19 +12,19 @@
 
 #include "../includes/minishell.h"
 
-void	remove_all_chars(char* str, char c)
+void	remove_all_chars(char *str, char c)
 {
 	char	*pr;
 	char	*pw;
 
 	pr = str;
 	pw = str;
-    while (*pr)
+	while (*pr)
 	{
-        *pw = *pr++;
-        pw += (*pw != c);
-    }
-    *pw = '\0';
+		*pw = *pr++;
+		pw += (*pw != c);
+	}
+	*pw = '\0';
 }
 
 char	*ft_strncpy(char *dst, const char *src, int len)
@@ -55,7 +55,7 @@ char	*ft_sub_str(const char *src, int len)
 
 int	is_two(char *tok, char c)
 {
-	int i;
+	int	i;
 	int	count;
 
 	i = 0;
@@ -82,4 +82,3 @@ int	is_quotes(char *tok)
 	else
 		return (0);
 }
-

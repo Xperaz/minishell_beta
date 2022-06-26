@@ -18,17 +18,16 @@ void	ft_free(char *s1, char *s2)
 	ft_bzero(s2, ft_strlen(s2));
 }
 
-int ft_open(t_cmd *node)
+int	ft_open(t_cmd *node)
 {
-	int i;
-	int	flag;
+	int	i;
 
 	i = -1;
-	flag = 1;
 	node->del = NULL;
 	while (node->cmd[++i])
 	{
-		if ((!ft_strcmp1(node->cmd[i], ">")) || (!ft_strcmp1(node->cmd[i], ">>"))
+		if ((!ft_strcmp1(node->cmd[i], ">"))
+			|| (!ft_strcmp1(node->cmd[i], ">>"))
 			|| (!ft_strcmp1(node->cmd[i], "<>")))
 			ft_input_file(node, &i);
 		else if (!ft_strcmp1(node->cmd[i], "<<"))
@@ -43,7 +42,7 @@ int ft_open(t_cmd *node)
 			ft_free(node->cmd[i + 1], node->cmd[i]);
 		}
 	}
-	return(-1);
+	return (-1);
 }
 
 void	open_files(t_cmd *node)
@@ -53,7 +52,7 @@ void	open_files(t_cmd *node)
 
 	node->infile = 0;
 	node->outfile = 1;
-	node->herdoc = 	0;
+	node->herdoc = 0;
 	tmp = node;
 	while (tmp)
 	{
@@ -75,10 +74,10 @@ void	open_files(t_cmd *node)
 int	is_redirection(char *tok)
 {
 	if (!ft_strcmp1(tok, ">") || !ft_strcmp1(tok, "<")
-			|| !ft_strcmp1(tok, ">>") || !ft_strcmp1(tok, "<<")
-			|| !ft_strcmp1(tok, "<>"))
-			return (1);
-	return (0);	
+		|| !ft_strcmp1(tok, ">>") || !ft_strcmp1(tok, "<<")
+		|| !ft_strcmp1(tok, "<>"))
+		return (1);
+	return (0);
 }
 
 int	is_file(t_cmd *node)

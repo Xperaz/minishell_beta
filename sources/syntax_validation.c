@@ -20,9 +20,9 @@ int	check_is_var(char *var)
 	while (var[i])
 	{
 		if (var[i] == '"')
-			return(34);
+			return (34);
 		if (var[i] == '\'')
-			return(39);
+			return (39);
 		i++;
 	}
 	return (0);
@@ -44,17 +44,17 @@ int	invalid_token(char *node)
 	}
 	else if (!ft_strncmp(node, "()", 2) || !ft_strncmp(node, "||", 2)
 		|| !ft_strncmp(node, "&&", 2))
-			return (0);
+		return (0);
 	return (1);
 }
 
 int	is_operator(char *tok)
 {
 	if (!ft_strcmp1(tok, ">") || !ft_strcmp1(tok, "<")
-			|| !ft_strcmp1(tok, ">>") || !ft_strcmp1(tok, "|")
-			|| !ft_strcmp1(tok, "<>"))
-			return (1);
-	return (0);	
+		|| !ft_strcmp1(tok, ">>") || !ft_strcmp1(tok, "|")
+		|| !ft_strcmp1(tok, "<>"))
+		return (1);
+	return (0);
 }
 
 int	is_heredoc(char *tok)
@@ -64,7 +64,7 @@ int	is_heredoc(char *tok)
 	return (0);
 }
 
-int		syntax_validation(t_token *list)
+int	syntax_validation(t_token *list)
 {
 	t_token	*tmp;
 
@@ -73,11 +73,13 @@ int		syntax_validation(t_token *list)
 	{
 		if (!invalid_token(tmp->data))
 			return (0);
-		else if (is_operator(tmp->data) &&
-			(tmp->next == NULL || !ft_strcmp1(tmp->next->data, "|")))
+		else if (is_operator(tmp->data)
+			&& (tmp->next == NULL
+				|| !ft_strcmp1(tmp->next->data, "|")))
 			return (0);
-		else if (is_heredoc(tmp->data) &&
-			(tmp->next == NULL || is_operator(tmp->next->data) || is_heredoc(tmp->next->data)))
+		else if (is_heredoc(tmp->data)
+			&& (tmp->next == NULL
+				|| is_operator(tmp->next->data) || is_heredoc(tmp->next->data)))
 			return (0);
 		tmp = tmp->next;
 	}

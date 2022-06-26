@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:51 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 13:55:52 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:40:21 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,42 +38,40 @@ t_cmd	*new_cmd_token(char **data)
 	return (new);
 }
 
-void    add_cmd_to_end(t_cmd** command, char **new_data)
+void	add_cmd_to_end(t_cmd **command, char **new_data)
 {
-    t_cmd   *new_node; 
-    t_cmd   *last;
-    
-    new_node = (t_cmd *) malloc(sizeof(t_cmd));
-    new_node->cmd = new_data;
-    new_node->next = NULL;
-  
-    if (*command == NULL)
-    {
-       *command = new_node;
-       return;
-    } 
-    
-    last = *command;
-    while (last->next != NULL)
-        last = last->next;
-    last->next = new_node;
-    return;   
+	t_cmd	*new_node;
+	t_cmd	*last;
+
+	new_node = (t_cmd *) malloc(sizeof(t_cmd));
+	new_node->cmd = new_data;
+	new_node->next = NULL;
+	if (*command == NULL)
+	{
+		*command = new_node;
+		return ;
+	}
+	last = *command;
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new_node;
+	return ;
 }
 
-void	delete_cmd(t_cmd** head, t_cmd *del_node)
+void	delete_cmd(t_cmd **head, t_cmd *del_node)
 {
 	if (*head == NULL || del_node == NULL)
-		return;
+		return ;
 	if (*head == del_node)
 		*head = del_node->next;
 	free(del_node);
 }
 
-void	clear_cmds(t_cmd** head_ref)
+void	clear_cmds(t_cmd **head_ref)
 {
-	t_cmd* temp;
-	t_cmd* next;
-	
+	t_cmd	*temp;
+	t_cmd	*next;
+
 	temp = *head_ref;
 	while (temp != NULL)
 	{
@@ -81,19 +79,4 @@ void	clear_cmds(t_cmd** head_ref)
 		delete_cmd(head_ref, temp);
 		temp = next;
 	}
-}
-
-int	lstsize2(t_cmd *lst)
-{
-	int		i;
-	t_cmd	*new;
-
-	new = lst;
-	i = 0;
-	while (new != NULL)
-	{
-		i++;
-		new = new->next;
-	}
-	return (i);
 }

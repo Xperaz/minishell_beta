@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:22 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 13:56:23 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:11:56 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_token	*new_token(char *data, int size, t_token_type type)
 	return (new);
 }
 
-void	add_to_end(t_token** token, t_token *new)
+void	add_to_end(t_token **token, t_token *new)
 {
-    t_token	*tmp;
+	t_token	*tmp;
 
 	if ((*token) && new)
 	{
@@ -56,10 +56,10 @@ void	add_to_end(t_token** token, t_token *new)
 	(*token)->taille++;
 }
 
-void	delete_node(t_token** head, t_token *del_node)
+void	delete_node(t_token **head, t_token *del_node)
 {
 	if (*head == NULL || del_node == NULL)
-		return;
+		return ;
 	if (*head == del_node)
 		*head = del_node->next;
 	if (del_node->next != NULL)
@@ -69,11 +69,11 @@ void	delete_node(t_token** head, t_token *del_node)
 	free(del_node);
 }
 
-void	list_clear(t_token** head_ref)
+void	list_clear(t_token	**head_ref)
 {
-	t_token* temp;
-	t_token* next;
-	
+	t_token	*temp;
+	t_token	*next;
+
 	temp = *head_ref;
 	while (temp != NULL)
 	{
@@ -81,19 +81,4 @@ void	list_clear(t_token** head_ref)
 		delete_node(head_ref, temp);
 		temp = next;
 	}
-}
-
-int	lstsize(t_token *lst)
-{
-	int		i;
-	t_token	*new;
-
-	new = lst;
-	i = 0;
-	while (new != NULL)
-	{
-		i++;
-		new = new->next;
-	}
-	return (i);
 }

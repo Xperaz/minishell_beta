@@ -20,7 +20,7 @@ char	*ft_strjoin_1(char *s1, char *s2)
 
 	if (s1 == NULL)
 		s1 = ft_strdup("");
-	if(s2 == NULL)
+	if (s2 == NULL)
 		s2 = ft_strdup("");
 	i = 0;
 	j = 0;

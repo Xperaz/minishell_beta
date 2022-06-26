@@ -17,10 +17,10 @@ int	open_redirect_input(char *file, t_cmd *node)
 	int	fd;
 	int	flag;
 
-	flag  = 1;
+	flag = 1;
 	if ((access(file, F_OK)) == 0)
 	{
-		fd = open(file, O_WRONLY,  S_IRWXU);
+		fd = open(file, O_WRONLY, S_IRWXU);
 		node->infile = fd;
 	}
 	else
@@ -30,23 +30,23 @@ int	open_redirect_input(char *file, t_cmd *node)
 
 void	open_app_redirect_out(char *file, t_cmd *node)
 {
-	int fd;
+	int	fd;
 
 	if ((!access(file, F_OK)) == 0)
 	{
-		fd = open(file, O_WRONLY,  S_IWUSR);
+		fd = open(file, O_WRONLY, S_IWUSR);
 		node->outfile = fd;
 	}
 	else
 	{
-		fd = open(file, O_CREAT,  S_IWUSR);
+		fd = open(file, O_CREAT, S_IWUSR);
 		node->outfile = fd;
 	}
 }
 
 void	open_redirect_out(char *fl, t_cmd *node)
 {
-	int fd;
+	int	fd;
 
 	fd = open(fl, O_CREAT, S_IRWXU);
 	node->outfile = fd;
@@ -56,12 +56,12 @@ void	ft_input_file(t_cmd *node, int *i)
 {
 	if (!ft_strcmp1(node->cmd[*i], ">") || !ft_strcmp1(node->cmd[*i], "<>"))
 	{
-			open_redirect_out(node->cmd[*i + 1], node);
-			ft_free(node->cmd[*i + 1], node->cmd[*i]);
+		open_redirect_out(node->cmd[*i + 1], node);
+		ft_free(node->cmd[*i + 1], node->cmd[*i]);
 	}
 	else if (!ft_strcmp1(node->cmd[*i], ">>"))
 	{
-			open_app_redirect_out(node->cmd[*i + 1], node);
-			ft_free(node->cmd[*i + 1], node->cmd[*i]);
+		open_app_redirect_out(node->cmd[*i + 1], node);
+		ft_free(node->cmd[*i + 1], node->cmd[*i]);
 	}
 }

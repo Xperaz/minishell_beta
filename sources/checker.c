@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/minishell.h"
 
-void	print_error()
+void	print_error(void)
 {
 	printf("%s\n", errors);
 	rl_on_new_line();
 }
+
 void	ft_check(char *command)
 {
 	if (!ft_strcmp1(command, "exit"))

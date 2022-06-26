@@ -81,7 +81,7 @@ t_token	*ft_tokens(char *cmd_line)
 		else
 		{
 			get_next_token(cmd_line + i, &tokn.size, &tokn.type);
-			tok = new_token(cmd_line + i,tokn.size, tokn.type);
+			tok = new_token(cmd_line + i, tokn.size, tokn.type);
 			add_to_end(&token, tok);
 			i += tokn.size;
 		}
