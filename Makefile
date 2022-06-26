@@ -6,7 +6,7 @@
 #    By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/25 13:56:52 by aouhadou          #+#    #+#              #
-#    Updated: 2022/06/26 15:16:17 by aouhadou         ###   ########.fr        #
+#    Updated: 2022/06/26 16:37:35 by aouhadou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror
 
 SRCF = sources/
 
-SRC  = minishell.c checker.c list_utils.c \
+SRC  = minishell.c checker.c list_utils.c lis_utils2.c \
 	tokenizer.c toknizer_utils.c \
 	syntax_validation.c \
 	cmd_list_utils.c parser.c parser_utils.c \

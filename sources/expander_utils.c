@@ -55,7 +55,7 @@ int	get_env_end(char *str)
 			return (i);
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
 char	*dollar_substr1(char *str)
@@ -63,6 +63,7 @@ char	*dollar_substr1(char *str)
 	char	*sub;
 	char	*res;
 	int		end;
+
 	sub = strchr(str, '$');
 	end = get_env_end(sub);
 	res = ft_substr(sub, 1, end - 1);
@@ -74,6 +75,7 @@ char	*dollar_substr(char *str)
 	char	*sub;
 	char	*res;
 	int		end;
+
 	sub = strchr(str, '$');
 	end = get_env_end(sub);
 	res = ft_substr(sub, 0, end);

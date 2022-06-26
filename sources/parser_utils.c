@@ -6,34 +6,15 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:30 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 20:41:20 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:01:00 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strcmp1(char *s1, char *s2)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0' || s2[j] != '\0')
-	{
-		if (s1[i] > s2[j])
-			return (s1[i] - s2[j]);
-		else if (s1[i] < s2[j])
-			return ((s1[i] - s2[j]));
-		i++;
-		j++;
-	}
-	return (0);
-}
-
 int	count_size(t_token	*node, int start)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	int		i;
 	int		compt;
 
@@ -47,13 +28,14 @@ int	count_size(t_token	*node, int start)
 	compt = 0;
 	while (tmp)
 	{
-		if(!ft_strcmp1(tmp->data, "|"))
-			break;
+		if (!ft_strcmp1(tmp->data, "|"))
+			break ;
 		compt++;
 		tmp = tmp->next;
 	}
-	return(compt);
+	return (compt);
 }
+
 char	**remplir_tab(t_token *node, int start)
 {
 	char	**tab;
@@ -63,8 +45,8 @@ char	**remplir_tab(t_token *node, int start)
 
 	size = count_size(node, start);
 	tab = malloc(sizeof(char *) * (size + 1));
-	if(!tab)
-		return(NULL);
+	if (!tab)
+		return (NULL);
 	i = 0;
 	tmp = node;
 	while (i < start)
@@ -80,21 +62,20 @@ char	**remplir_tab(t_token *node, int start)
 		tmp = tmp->next;
 	}
 	tab[i] = NULL;
-	return(tab);
+	return (tab);
 }
 
-int have_option(char *cmd)
+int	have_option(char *cmd)
 {
 	int	i;
 
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i] == '-')
+		if (cmd[i] == '-' && cmd[i - 1] == ' ')
 			return (1);
 		i++;
 	}
-	
 	return (0);
 }
 

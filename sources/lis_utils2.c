@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   lis_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 13:56:36 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 11:47:16 by aouhadou         ###   ########.fr       */
+/*   Created: 2022/06/26 16:34:59 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/26 19:11:16 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	handle_sig(int sig)
+int	lstsize2(t_cmd *lst)
 {
-	if (sig == SIGINT)
+	int		i;
+	t_cmd	*new;
+
+	new = lst;
+	i = 0;
+	while (new != NULL)
 	{
-		printf("\033[K$>\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		i++;
+		new = new->next;
 	}
-	if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	return (i);
 }
 
-void	ctrl_d(void)
+int	lstsize(t_token *lst)
 {
-	printf("\033[1A\033[3Cexit\n");
-	exit(1);
+	int		i;
+	t_token	*new;
+
+	new = lst;
+	i = 0;
+	while (new != NULL)
+	{
+		i++;
+		new = new->next;
+	}
+	return (i);
 }

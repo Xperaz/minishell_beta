@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 15:46:02 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 15:48:33 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:17:58 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,17 @@ typedef struct command {
 	struct	command *next;
 } t_cmd;
 
+//replace substring in string info
+
+typedef struct dollar
+{
+	size_t		i;
+	size_t		c_d;
+	size_t		x;
+	size_t		t;
+	const char	*temp;
+	char		*buff;
+}	t_info;
 
 //checker functions
 void				ft_check(char *command);
@@ -83,7 +94,7 @@ void				delete_cmd(t_cmd** head, t_cmd *del_node);
 int					lstsize2(t_cmd *lst);
 
 t_token				*new_token(char *data, int size, t_token_type type);
-t_token_type	token_found(const char *cmd_line);
+t_token_type		token_found(const char *cmd_line);
 int					get_word_token_size(char *cmd_line);
 void				get_next_token(char *cmd_line, int *size, t_token_type *type);
 
