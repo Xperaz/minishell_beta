@@ -6,16 +6,16 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:34:59 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 19:11:16 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:49:11 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	lstsize2(t_cmd *lst)
+int	lstsize2(t_command *lst)
 {
-	int		i;
-	t_cmd	*new;
+	int			i;
+	t_command	*new;
 
 	new = lst;
 	i = 0;

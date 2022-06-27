@@ -6,16 +6,16 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/27 10:44:38 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:05:46 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/minishell.h"
 
-void display(t_cmd *node) {
+void display(t_command *node) {
 
-	t_cmd	*tmp;
+	t_command	*tmp;
 	int i;
 
 	tmp = node;
@@ -24,14 +24,14 @@ void display(t_cmd *node) {
 		i = 0;
 		while (tmp->cmd[i])
 		{
-			if (tmp->cmd[i] != NULL)
-				printf("{%s} => |%d|", tmp->cmd[i], tmp->herdoc);
+			//if (tmp->cmd[i][0] != 0)
+			printf("{%s} => |%d| => oufilefile: [%d] => infile [%d]\n", tmp->cmd[i], tmp->herdoc, tmp->outfile, tmp->infile);
 			i++;
 		}
 		if (tmp->herdoc == 1)
 		{
 			i = 0;
-			printf("\n");
+			printf("\n *** herdoc **\n");
 			while (tmp->delims[i])
 			{
 				printf("|%s| ", tmp->delims[i]);
@@ -61,10 +61,10 @@ t_token	*ft_lexer(char *line)
 	return (list);
 }
 
-t_cmd	*parser(char *line)
+t_command	*parser(char *line)
 {
 	t_token	*list;
-	t_cmd	*cmd_list;
+	t_command	*cmd_list;
 	
 	list = ft_lexer(line);
 	if (!list)
@@ -89,7 +89,7 @@ t_cmd	*parser(char *line)
 void	ft_prompt(void)
 {
 	char	*command;
-	t_cmd	*cmds;
+	t_command	*cmds;
 
 	while (1)
 	{

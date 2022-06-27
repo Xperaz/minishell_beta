@@ -6,15 +6,15 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:51 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 16:40:21 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:50:00 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_cmd	*last_cmd(t_cmd *token)
+t_command	*last_cmd(t_command *token)
 {
-	t_cmd	*last;
+	t_command	*last;
 
 	last = NULL;
 	if (token)
@@ -26,11 +26,11 @@ t_cmd	*last_cmd(t_cmd *token)
 	return (last);
 }
 
-t_cmd	*new_cmd_token(char **data)
+t_command	*new_cmd_token(char **data)
 {
-	t_cmd	*new;
+	t_command	*new;
 
-	new = (t_cmd *)malloc(sizeof(t_cmd));
+	new = (t_command *)malloc(sizeof(t_command));
 	if (!new)
 		return (NULL);
 	new->cmd = data;
@@ -38,12 +38,12 @@ t_cmd	*new_cmd_token(char **data)
 	return (new);
 }
 
-void	add_cmd_to_end(t_cmd **command, char **new_data)
+void	add_cmd_to_end(t_command **command, char **new_data)
 {
-	t_cmd	*new_node;
-	t_cmd	*last;
+	t_command	*new_node;
+	t_command	*last;
 
-	new_node = (t_cmd *) malloc(sizeof(t_cmd));
+	new_node = (t_command *) malloc(sizeof(t_command));
 	new_node->cmd = new_data;
 	new_node->next = NULL;
 	if (*command == NULL)
@@ -58,7 +58,7 @@ void	add_cmd_to_end(t_cmd **command, char **new_data)
 	return ;
 }
 
-void	delete_cmd(t_cmd **head, t_cmd *del_node)
+void	delete_cmd(t_command **head, t_command *del_node)
 {
 	if (*head == NULL || del_node == NULL)
 		return ;
@@ -67,10 +67,10 @@ void	delete_cmd(t_cmd **head, t_cmd *del_node)
 	free(del_node);
 }
 
-void	clear_cmds(t_cmd **head_ref)
+void	clear_cmds(t_command **head_ref)
 {
-	t_cmd	*temp;
-	t_cmd	*next;
+	t_command	*temp;
+	t_command	*next;
 
 	temp = *head_ref;
 	while (temp != NULL)

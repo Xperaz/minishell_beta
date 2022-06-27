@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:23 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 19:01:10 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:48:17 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	ft_strcmp1(char *s1, char *s2)
 	return (0);
 }
 
-t_cmd	*creat_cmds(t_token *node)
+t_command	*creat_cmds(t_token *node)
 {
-	t_cmd	*cmds;
-	int		lst_size;
-	int		i;
-	int		start;
+	t_command	*cmds;
+	int			lst_size;
+	int			i;
+	int			start;
 
 	lst_size = lstsize(node);
 	cmds = NULL;

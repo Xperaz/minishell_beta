@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:18 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 15:04:22 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:52:37 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strjoin_1(char *s1, char *s2)
 	return (ptr);
 }
 
-void	create_delimters(t_cmd *node, int *i)
+void	create_delimters(t_command *node, int *i)
 {
 	node->herdoc = 1;
 	node->infile = 0;

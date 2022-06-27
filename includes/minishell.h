@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 15:46:02 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/27 10:58:01 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:46:39 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct command {
 	char	*del;
 	int		flag;
 	struct	command *next;
-} t_cmd;
+} t_command;
 
 //replace substring in string info
 
@@ -87,11 +87,11 @@ void    			list_clear(t_token** head_ref);
 void				delete_node(t_token** head, t_token *del_node);
 int					lstsize(t_token *lst);
 //cmds list_utls
-void    			add_cmd_to_end(t_cmd** command, char **new_data);
-t_cmd				*new_cmd_token(char **data);
-void				clear_cmds(t_cmd** head_ref);
-void				delete_cmd(t_cmd** head, t_cmd *del_node);
-int					lstsize2(t_cmd *lst);
+void    			add_cmd_to_end(t_command** command, char **new_data);
+t_command				*new_cmd_token(char **data);
+void				clear_cmds(t_command** head_ref);
+void				delete_cmd(t_command** head, t_command *del_node);
+int					lstsize2(t_command *lst);
 
 t_token				*new_token(char *data, int size, t_token_type type);
 t_token_type		token_found(const char *cmd_line);
@@ -117,13 +117,13 @@ int					is_operator(char *tok);
 int					syntax_validation(t_token *list);
 
 //parser
-t_cmd				*creat_cmds(t_token *node);
+t_command				*creat_cmds(t_token *node);
 char				**remplir_tab(t_token *node, int start);
 int					count_size(t_token	*node, int start);
-int					remove_quotes(t_cmd *node);
+int					remove_quotes(t_command *node);
 
 //epand dollar
-void				expand_dollar(t_cmd *node);
+void				expand_dollar(t_command *node);
 
 //expander_utils
 char				*dollar_substr1(char *str);
@@ -135,17 +135,17 @@ const char			*ft_strstr(const char *str, const char *to_find);
 //files creation
 void				ft_free(char *s1, char *s2);
 int					is_redirection(char *tok);
-int					is_file(t_cmd *node);
-int					open_redirect_input(char *file, t_cmd *node);
-void				open_app_redirect_out(char *file, t_cmd *node);
-void				open_redirect_out(char *fl, t_cmd *node);
-void				ft_out_file(t_cmd *node, int *i);
-int					ft_open(t_cmd *node);
-void				open_files(t_cmd *node);
+int					is_file(t_command *node);
+int					open_redirect_input(char *file, t_command *node);
+void				open_app_redirect_out(char *file, t_command *node);
+void				open_redirect_out(char *fl, t_command *node);
+void				ft_out_file(t_command *node, int *i);
+int					ft_open(t_command *node);
+void				open_files(t_command *node);
 
 // herduq
 char				*ft_strjoin_1(char *s1, char *s2);
-void				create_delimters(t_cmd *node, int *i);
+void				create_delimters(t_command *node, int *i);
 
 //signals
 void				handle_sig(int sig);

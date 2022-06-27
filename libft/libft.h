@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 21:40:46 by houazzan          #+#    #+#             */
-/*   Updated: 2022/05/27 18:34:44 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:55:18 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	 LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
 # include    <stdlib.h>
 # include    <unistd.h>
-
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

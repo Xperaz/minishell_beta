@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:13 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/27 11:40:21 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:54:18 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	is_outfile(char *file)
 {
-	if ((!ft_strcmp1(file, ">")) || (!ft_strcmp1(file, ">>")) 
+	if ((!ft_strcmp1(file, ">")) || (!ft_strcmp1(file, ">>"))
 		|| (!ft_strcmp1(file, "<>")))
 		return (1);
 	return (0);
 }
 
-int	ft_open(t_cmd *node)
+int	ft_open(t_command *node)
 {
 	int	i;
 
@@ -47,10 +47,10 @@ int	ft_open(t_cmd *node)
 	return (-1);
 }
 
-void	open_files(t_cmd *node)
+void	open_files(t_command *node)
 {
-	int		flag;
-	t_cmd	*tmp;
+	int			flag;
+	t_command	*tmp;
 
 	node->infile = 0;
 	node->outfile = 1;
@@ -82,7 +82,7 @@ int	is_redirection(char *tok)
 	return (0);
 }
 
-int	is_file(t_cmd *node)
+int	is_file(t_command *node)
 {
 	int	i;
 
