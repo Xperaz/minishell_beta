@@ -6,16 +6,18 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:13 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 13:44:27 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:40:21 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_free(char *s1, char *s2)
+int	is_outfile(char *file)
 {
-	ft_bzero(s1, ft_strlen(s1));
-	ft_bzero(s2, ft_strlen(s2));
+	if ((!ft_strcmp1(file, ">")) || (!ft_strcmp1(file, ">>")) 
+		|| (!ft_strcmp1(file, "<>")))
+		return (1);
+	return (0);
 }
 
 int	ft_open(t_cmd *node)
@@ -26,15 +28,15 @@ int	ft_open(t_cmd *node)
 	node->del = NULL;
 	while (node->cmd[++i])
 	{
-		if ((!ft_strcmp1(node->cmd[i], ">"))
-			|| (!ft_strcmp1(node->cmd[i], ">>"))
-			|| (!ft_strcmp1(node->cmd[i], "<>")))
-			ft_input_file(node, &i);
+		if (is_outfile(node->cmd[i]))
+			ft_out_file(node, &i);
 		else if (!ft_strcmp1(node->cmd[i], "<<"))
 			create_delimters(node, &i);
 		else if (!ft_strcmp1(node->cmd[i], "<"))
 		{
-			if (!open_redirect_input(node->cmd[i + 1], node))
+			if (access(node->cmd[i + 1], F_OK) && node->cmd[i - 1] == 0)
+				printf("shell: no such file: %s\n", node->cmd[i + 1]);
+			else if (!open_redirect_input(node->cmd[i + 1], node))
 			{
 				ft_bzero(node->cmd[i], ft_strlen(node->cmd[i]));
 				return (i + 2);

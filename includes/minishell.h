@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 15:46:02 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 17:17:58 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:58:01 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int					is_file(t_cmd *node);
 int					open_redirect_input(char *file, t_cmd *node);
 void				open_app_redirect_out(char *file, t_cmd *node);
 void				open_redirect_out(char *fl, t_cmd *node);
-void				ft_input_file(t_cmd *node, int *i);
+void				ft_out_file(t_cmd *node, int *i);
 int					ft_open(t_cmd *node);
 void				open_files(t_cmd *node);
 

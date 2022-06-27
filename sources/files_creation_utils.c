@@ -6,11 +6,17 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:06 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/25 18:14:57 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:35:10 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_free(char *s1, char *s2)
+{
+	ft_bzero(s1, ft_strlen(s1));
+	ft_bzero(s2, ft_strlen(s2));
+}
 
 int	open_redirect_input(char *file, t_cmd *node)
 {
@@ -52,7 +58,7 @@ void	open_redirect_out(char *fl, t_cmd *node)
 	node->outfile = fd;
 }
 
-void	ft_input_file(t_cmd *node, int *i)
+void	ft_out_file(t_cmd *node, int *i)
 {
 	if (!ft_strcmp1(node->cmd[*i], ">") || !ft_strcmp1(node->cmd[*i], "<>"))
 	{

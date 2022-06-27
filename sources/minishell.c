@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/27 09:42:25 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:44:38 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void display(t_cmd *node) {
 		i = 0;
 		while (tmp->cmd[i])
 		{
-			printf("{%s} => |%d|", tmp->cmd[i], tmp->herdoc);
+			if (tmp->cmd[i] != NULL)
+				printf("{%s} => |%d|", tmp->cmd[i], tmp->herdoc);
 			i++;
 		}
 		if (tmp->herdoc == 1)
