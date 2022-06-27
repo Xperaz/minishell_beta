@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:01 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/26 18:12:27 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:50:33 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	replace_sub(char **str, const char *old, const char *new_)
 	free(info.buff);
 }
 
-void	expand_dollar(t_cmd *node)
+void	expand_dollar(t_command *node)
 {
 	int		i;
 	char	*sub;
