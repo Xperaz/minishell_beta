@@ -1,51 +1,47 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/25 13:56:52 by aouhadou          #+#    #+#              #
-#    Updated: 2022/06/28 13:53:30 by aouhadou         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC = gcc 
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
-SRCF = sources/
+EXEC_FILES = sources/exec/
 
-SRC  = minishell.c checker.c list_utils.c lis_utils2.c \
-	tokenizer.c toknizer_utils.c \
-	syntax_validation.c \
-	cmd_list_utils.c parser.c parser_utils.c \
-	expander.c expander_utils.c files_creation.c \
-	files_creation_utils.c heredoc_utils.c signals.c \
+PARSE_FILES = sources/parse/
 
-SRCP = $(addprefix $(SRCF), $(SRC))
+E_SRC  = execute.c useful/quite.c useful/free_list.c useful/exec_utiles.c useful/exec_utiles1.c useful/exec_utiles2.c\
+		 useful/exec_utiles3.c\
+		 useful/non_execve.c builtins/echo.c builtins/pwd.c builtins/env.c builtins/cd.c builtins/export.c builtins/unset.c builtins/exit.c \
+	   
+	   
+P_SRC  =  minishell.c checker.c list_utils.c lis_utils2.c tokenizer.c toknizer_utils.c syntax_validation.c cmd_list_utils.c parser.c parser_utils.c \
+	      expander.c expander_utils.c files_creation.c files_creation_utils.c heredoc_utils.c signals.c remove_unused_tab.c\
 
-OBJ = $(SRCP:%.c=%.o)
+
+PARSE = $(addprefix $(PARSE_FILES), $(P_SRC))
+EXEC  = $(addprefix $(EXEC_FILES), $(E_SRC))
+
+
+P_OBJ = $(PARSE:%.c=%.o)
+E_OBJ = $(EXEC:%.c=%.o)
 
 NAME = minishell
 
 all  :$(NAME)
 
-$(NAME) : $(OBJ) 
-		@$(CC) $(FLAGS) ./libft/libft.a $(OBJ) -o $(NAME) -lreadline -L$(shell brew --prefix readline)/lib
-		@echo "$(GREEN) " MINISHELL DONE" $(RESET)\n"
+$(NAME) : $(P_OBJ) $(E_OBJ)
+		@make -C ./libft
+		@make bonus -C ./libft
+		@$(CC) $(FLAGS) ./libft/libft.a $(P_OBJ) $(E_OBJ) -o $(NAME) -L$(shell brew --prefix readline)/lib -lreadline 
+		@echo "\n \n$(GREEN)$(TAB)$(TAB)"CREATED" $(RESET)"
 
-%.o : %.c includes/minishell.h
-	@make -C ./libft
-	@$(CC) $(FLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@ 
-	@echo "$(CHANGE)$(GREEN)∰$(RESET)\c"
+%.o : %.c includes/minishell.h  libft/libft.h
+	@$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@
 
 clean :
-		@rm -rf $(OBJ)
+		@rm -rf $(E_OBJ) $(P_OBJ)
 		@make fclean -C ./libft
 
 fclean : clean
 		@rm -rf $(NAME)
+
 re		: clean all
 
 

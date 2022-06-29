@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 20:59:28 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/15 14:27:13 by houazzan         ###   ########.fr       */
+/*   Created: 2022/06/01 16:39:32 by houazzan          #+#    #+#             */
+/*   Updated: 2022/06/03 14:45:13 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_lstrcmp(const char *s1, const char *s2)
 {
-	int	i;
-	int	res;
-	int	signe;
+	int 			i;
+	unsigned char	*c_s1;
+	unsigned char	*c_s2;
 
 	i = 0;
-	res = 0;
-	signe = 1;
-	while (str[i] == ' ' || str[i] == '\f' || \
-	str[i] == '\n' || str[i] == '\r' || \
-	str[i] == '\t' || str[i] == '\v')
+	c_s1 = (unsigned char *)s1;
+	c_s2 = (unsigned char *)s2;
+	while (c_s1[i] && c_s2[i])
 	{
+		if (ft_tolower(c_s1[i]) != ft_tolower(c_s2[i]))
+			return (c_s1[i] - c_s2[i]);
 		i++;
 	}
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			signe *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = res * 10 + str[i] - '0';
-		i++;
-	}
-	return (res * signe);
+	return (c_s1[i] - c_s2[i]);
 }

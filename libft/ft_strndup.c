@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 20:59:28 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/15 14:27:13 by houazzan         ###   ########.fr       */
+/*   Created: 2022/06/08 09:26:03 by houazzan          #+#    #+#             */
+/*   Updated: 2022/06/08 09:33:18 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include    "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strndup(const char *src, size_t n)
 {
-	int	i;
-	int	res;
-	int	signe;
+	size_t	i;
+	int		j;
+	char	*ptr;
 
 	i = 0;
-	res = 0;
-	signe = 1;
-	while (str[i] == ' ' || str[i] == '\f' || \
-	str[i] == '\n' || str[i] == '\r' || \
-	str[i] == '\t' || str[i] == '\v')
+	j = 0;
+	ptr = NULL;
+	ptr = malloc(n * sizeof(char) + 1);
+	if (ptr)
 	{
-		i++;
+		i = 0;
+		while (i < n)
+		{
+			ptr[j++] = src[i++];
+		}
+		ptr[j] = ('\0');
 	}
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			signe *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = res * 10 + str[i] - '0';
-		i++;
-	}
-	return (res * signe);
+	return (ptr);
 }

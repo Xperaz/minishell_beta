@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   exec_utiles3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 20:50:27 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/06 11:23:32 by houazzan         ###   ########.fr       */
+/*   Created: 2022/06/25 18:51:18 by houazzan          #+#    #+#             */
+/*   Updated: 2022/06/25 18:52:50 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "../../../includes/minishell.h"
 
-int	ft_isdigit(int c)
+int ft_env_size(t_env *env)
 {
-	return (c >= '0' && c <= '9');
+    int i;
+    i = 0;
+    while (env)
+    {
+        i++;
+        env = env->next;
+    }
+    return (i);
 }

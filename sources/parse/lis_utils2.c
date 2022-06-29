@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   lis_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 20:59:28 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/15 14:27:13 by houazzan         ###   ########.fr       */
+/*   Created: 2022/06/26 16:34:59 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/06/28 10:51:09 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 
-int	ft_atoi(const char *str)
+int	lstsize2(t_command *lst)
 {
-	int	i;
-	int	res;
-	int	signe;
+	int			i;
+	t_command	*new;
 
+	new = lst;
 	i = 0;
-	res = 0;
-	signe = 1;
-	while (str[i] == ' ' || str[i] == '\f' || \
-	str[i] == '\n' || str[i] == '\r' || \
-	str[i] == '\t' || str[i] == '\v')
+	while (new != NULL)
 	{
 		i++;
+		new = new->next;
 	}
-	if (str[i] == '-' || str[i] == '+')
+	return (i);
+}
+
+int	lstsize(t_token *lst)
+{
+	int		i;
+	t_token	*new;
+
+	new = lst;
+	i = 0;
+	while (new != NULL)
 	{
-		if (str[i] == '-')
-			signe *= -1;
 		i++;
+		new = new->next;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = res * 10 + str[i] - '0';
-		i++;
-	}
-	return (res * signe);
+	return (i);
 }
