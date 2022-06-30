@@ -6,12 +6,11 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 09:26:37 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/15 17:13:31 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/28 19:04:21 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"libft.h"
-#include <stdio.h>
 
 char **ft_fo_split(char *string, char separat)
 {

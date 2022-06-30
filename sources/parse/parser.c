@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:23 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 10:51:22 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:25:46 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,16 @@ t_command	*creat_cmds(t_token *node)
 {
 	t_command	*cmds;
 	int			lst_size;
-	int			i;
 	int			start;
 
 	lst_size = lstsize(node);
-	cmds = NULL;
-	i = 0;
 	start = 0;
+	cmds = NULL;
 	while (start < lst_size)
 	{
 		add_cmd_to_end(&cmds, remplir_tab(node, start));
 		start += count_size(node, start) + 1;
 	}
+	list_clear(&node);
 	return (cmds);
 }

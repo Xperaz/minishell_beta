@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:23:29 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/28 18:28:07 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/29 08:24:48 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	sort()
 	int		j;
 	char	*temp;
    
-	j = 0;
+	i = 0;
 	while (g_msh.sort_env[i] != NULL)
 	{
 		j = i + 1;

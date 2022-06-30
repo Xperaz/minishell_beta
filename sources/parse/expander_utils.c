@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:56 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 10:50:52 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:38:49 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*dollar_substr1(char *str)
 	char	*res;
 	int		end;
 
-	sub = strchr(str, '$');
+	sub = ft_strchr(str, '$');
 	end = get_env_end(sub);
 	res = ft_substr(sub, 1, end - 1);
 	return (res);
@@ -76,7 +76,7 @@ char	*dollar_substr(char *str)
 	char	*res;
 	int		end;
 
-	sub = strchr(str, '$');
+	sub = ft_strchr(str, '$');
 	end = get_env_end(sub);
 	res = ft_substr(sub, 0, end);
 	return (res);

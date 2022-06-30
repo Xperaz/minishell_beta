@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:08:13 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/28 18:24:42 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:29:45 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,17 @@ int	already_there(t_env **head)
 /* **************************************************** */
 /*                   🅲🆁🅴🅰🆃🅴_🅽🅾🅳🅴                  */
 /* **************************************************** */
-t_env	*create_env_node(char **env)
+t_env	*create_env_node(char **env, char *str)
 {
 	t_env	*new_node;
 
 	if (!env[1])
 		env[1] = ft_strdup("");
 	new_node = (t_env *)malloc(sizeof(t_env));
-	new_node->key = ft_strdup(ft_strjoin(env[0], "="));
+	if (str && strstr(str, "=") == NULL)
+		new_node->key = ft_strdup(env[0]);
+	else
+		new_node->key = ft_strdup(ft_strjoin(env[0], "="));
 	new_node->value = ft_strdup(env[1]);
 	new_node->next = NULL;
 	return (new_node);
@@ -102,13 +105,13 @@ void	get_env(char **env)
 	g_msh.dup_envp = NULL;
 	while (env[i])
 	{
-		node = create_env_node(ft_sp_split(env[i], '='));
+		node = create_env_node(ft_sp_split(env[i], '='), NULL);
 		add_env_back(&g_msh.dup_envp, node);
 		i++;
 	}
 	if (!already_there(&g_msh.dup_envp))
 	{
-		node = create_env_node(ft_split("OLDPWD", ' '));
+		node = create_env_node(ft_split("OLDPWD", ' '), NULL);
 		node->key = ft_strtrim(node->key, "=");
 		add_env_back(&g_msh.dup_envp, node);
 	}

@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:01 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 20:39:25 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:03:18 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	fast_strncat(char *dest, const char *src, size_t *size)
 
 	if (dest && src)
 	{
-		src_len = strlen(src);
+		src_len = ft_strlen(src);
 		ft_memcpy(dest + *size, src, src_len + 1u);
 		*size += src_len;
 	}
@@ -26,7 +26,7 @@ void	fast_strncat(char *dest, const char *src, size_t *size)
 
 void	ft_find_sub(const char *old, const char *new_, t_info *info)
 {
-	if (strstr(info->temp, old) == info->temp)
+	if (ft_strstr(info->temp, old) == info->temp)
 	{
 		info->x = 0;
 		fast_strncat(&info->buff[info->i], new_, &info->x);
@@ -79,14 +79,17 @@ void	expand_dollar(t_command *node)
 	int		i;
 	char	*sub;
 	char	*env;
+	int		flag;
 
 	while (node)
 	{
+		flag = 0;
 		i = 0;
 		while (node->cmd[i])
 		{
 			if (is_dollar(node->cmd[i]) >= 0 && node->cmd[i][0] != '\'')
 			{
+				flag = 1;
 				sub = dollar_substr(node->cmd[i]);
 				env = dollar_substr1(node->cmd[i]);
 				if (getenv(env))
@@ -95,6 +98,11 @@ void	expand_dollar(t_command *node)
 					replace_sub(&node->cmd[i], sub, "");
 			}
 			i++;
+		}
+		if (flag == 1)
+		{
+			free(sub);
+			free(env);
 		}
 		node = node->next;
 	}

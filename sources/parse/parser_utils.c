@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:30 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 12:07:24 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/30 18:10:09 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ char	**remplir_tab(t_token *node, int start)
 	i = 0;
 	while (i < size)
 	{
-		tab[i] = ft_strdup(tmp->data);
-		i++;
+		tab[i++] = ft_strdup(tmp->data);
 		tmp = tmp->next;
 	}
 	tab[i] = NULL;

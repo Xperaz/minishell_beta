@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:18 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 21:04:41 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:54:39 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strjoin_1(char *s1, char *s2)
 		ptr[i++] = s2[j];
 	ptr[i] = '\0';
 	free(s1);
-	return (free(s2), ptr);
+	return (ptr);
 }
 
 void	create_delimters(t_command *node, int *i)

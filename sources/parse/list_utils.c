@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:22 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 10:51:13 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:13:25 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,25 @@ void	delete_node(t_token **head, t_token *del_node)
 	free(del_node);
 }
 
-void	list_clear(t_token	**head_ref)
+void	*free_node(void *ptr)
 {
-	t_token	*temp;
-	t_token	*next;
+	if (ptr)
+		free(ptr);
+	return (NULL);
+}
 
-	temp = *head_ref;
-	while (temp != NULL)
+void	list_clear(t_token	**lst)
+{
+	t_token	*holder;
+
+	if (!lst)
+		return ;
+	while (*lst)
 	{
-		next = temp->next;
-		delete_node(head_ref, temp);
-		temp = next;
+		holder = *lst;
+		*lst = (*lst)->next;
+		holder->data = free_node(holder->data);
+		holder = free_node(holder);
 	}
+	*lst = NULL;
 }

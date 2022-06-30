@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:19:48 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/28 19:14:59 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:35:38 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,16 @@ typedef struct command {
 	t_builtins	cmd_type;
 } t_command;
 
+// ~ ******************** REMOVE UNUSED ARRAYS ************************* ~ \\
+
+typedef struct unsed
+{
+	int 	count;
+	int		total;
+	char	**tab;
+	int		i;
+	int		j;	
+} t_remove;
 
 // ~ ********************* 🅴🅽🆅🅸🆁🅴🅼🅴🅽🆃 🆂🆃🆁🆄🅲🆃 *********************** ~ \\
 
@@ -96,17 +106,6 @@ typedef struct dollar
 	const char	*temp;
 	char		*buff;
 }	t_info;
-
-// ~ ******************** REMOVE UNUSED ARRAYS ************************* ~ \\
-
-typedef struct unsed
-{
-	int 	count;
-	int		total;
-	char	**tab;
-	int		i;
-	int		j;	
-} t_remove;
 
 // ~ ********************* 🅶🅻🅾🅱🅰🅻 🆂🆃🆁🆄🅲🆃 *********************** ~ \\
 

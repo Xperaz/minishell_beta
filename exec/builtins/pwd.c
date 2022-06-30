@@ -6,12 +6,13 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:16:02 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/27 14:11:00 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:19:55 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../../includes/minishell.h"
+
 int   pwd()
 {
     t_env *ptr;
@@ -23,5 +24,5 @@ int   pwd()
             printf("%s\n", ptr->value);
         ptr = ptr->next;
     }
-    return (EXIT_SUCCESS);
+    return (0);
 }

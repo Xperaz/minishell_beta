@@ -62,7 +62,7 @@ int	echo()
 	}
 	if (flag == 0)
 		printf("\n");
-	return(EXIT_SUCCESS);
+	return(0);
 }
 
 

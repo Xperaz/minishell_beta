@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 09:58:56 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/27 16:22:11 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:19:29 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,5 @@ int 	cd()
         cd_with_operands(c_pwd);
 	else 
 		cd_no_operands(c_pwd);
-	return(EXIT_STATUS);
+	return(0);
 }

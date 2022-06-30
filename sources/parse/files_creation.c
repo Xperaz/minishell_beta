@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_creation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:13 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 10:51:03 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:25:02 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	open_files(t_command *node)
 	int			flag;
 	t_command	*tmp;
 
-	node->infile = 0;
-	node->outfile = 1;
 	node->herdoc = 0;
 	tmp = node;
 	while (tmp)
 	{
+		tmp->infile = 0;
+		tmp->outfile = 1;
 		flag = ft_open(tmp);
 		if (flag >= 0)
 		{

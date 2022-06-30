@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:07:29 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/28 17:23:52 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:41:21 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include	<stdio.h>
 # include	<stdlib.h>
-# include	<string.h>
+// # include	<string.h>
 # include	<errno.h>
 # include 	<unistd.h>
 # include	<stdint.h>
@@ -26,7 +26,8 @@
 # include	"structs.h"
 # include	"parse.h"
 # include 	<fcntl.h>
-# include 	<signal.h> 
+# include 	<signal.h>
+# include    <string.h> 
 # include	<readline/history.h>
 # include	<readline/readline.h>
 
@@ -41,7 +42,7 @@
 # define NO_ENV         0
 
 
-
+void display(t_command *node);
 
 t_list	*get_list(char **env, t_list *head);
 t_list	*create_node(char **command_list);
@@ -53,7 +54,7 @@ int     env(int state);
 void	free_env(t_list *env_list);
 int		cd();
 int		export();
-void	unset(t_list *command_list, t_list *env_list);
+int 	unset();
 void	exec(char *command_list, t_list *env_list);
 void	add_back(t_list **head, t_list *new_node);
 void	status(int status);
@@ -74,8 +75,8 @@ void        env_list_to_array();
 void        run_builtins();
 void	    get_env(char **env);
 int         ft_env_size(t_env *env);
-t_env	    *create_env_node(char **env);
-void	add_env_back(t_env **head, t_env *new_node);
+void	    add_env_back(t_env **head, t_env *new_node);
+t_env	    *create_env_node(char **env, char *str); 
 
 
 

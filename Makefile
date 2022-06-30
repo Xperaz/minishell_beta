@@ -1,12 +1,12 @@
 CC = gcc 
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
-EXEC_FILES = sources/exec/
+#EXEC_FILES = sources/exec/
 
 PARSE_FILES = sources/parse/
 
-E_SRC  = execute.c useful/quite.c useful/free_list.c useful/exec_utiles.c useful/exec_utiles1.c useful/exec_utiles2.c\
+#E_SRC  = execute.c useful/quite.c useful/free_list.c useful/exec_utiles.c useful/exec_utiles1.c useful/exec_utiles2.c\
 		 useful/exec_utiles3.c\
 		 useful/non_execve.c builtins/echo.c builtins/pwd.c builtins/env.c builtins/cd.c builtins/export.c builtins/unset.c builtins/exit.c \
 	   
@@ -16,11 +16,11 @@ P_SRC  =  minishell.c checker.c list_utils.c lis_utils2.c tokenizer.c toknizer_u
 
 
 PARSE = $(addprefix $(PARSE_FILES), $(P_SRC))
-EXEC  = $(addprefix $(EXEC_FILES), $(E_SRC))
+#EXEC  = $(addprefix $(EXEC_FILES), $(E_SRC))
 
 
 P_OBJ = $(PARSE:%.c=%.o)
-E_OBJ = $(EXEC:%.c=%.o)
+#E_OBJ = $(EXEC:%.c=%.o)
 
 NAME = minishell
 

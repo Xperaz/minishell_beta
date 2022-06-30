@@ -45,11 +45,10 @@ void	ft_remove_unsed(t_command *node)
 		{
 			if (tmp->cmd[data.i][0] != 0)
 				data.tab[data.j++] = ft_strdup(tmp->cmd[data.i]);
-			else
-				free(tmp->cmd[data.i]);
 			data.i++;
 		}
 		data.tab[data.j] = NULL;
+		free_tab(tmp->cmd);
 		tmp->cmd = data.tab;
 		tmp = tmp->next;
 	}

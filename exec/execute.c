@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:08:16 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/28 11:50:28 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:21:21 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	execute(t_command *cmds)
 	g_msh.cmd_number = 0;
 	//return (0);
 }
-
+// ~ don't forget to free after every execute 
 // ! don't know if i should cheak the exite status 
 //! in case of using pipes.
 //! the command is not found, the child process returns 127 and the parent process returns 1;

@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:43 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 20:34:32 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/30 18:02:50 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_token	*ft_tokens(char *cmd_line)
 {
 	t_token	*token;
 	t_token	tokn;
-	t_token	*tok;
 	int		i;
 
 	token = NULL;
@@ -81,8 +80,7 @@ t_token	*ft_tokens(char *cmd_line)
 		else
 		{
 			get_next_token(cmd_line + i, &tokn.size, &tokn.type);
-			tok = new_token(cmd_line + i, tokn.size, tokn.type);
-			add_to_end(&token, tok);
+			add_to_end(&token, new_token(cmd_line + i, tokn.size, tokn.type));
 			i += tokn.size;
 		}
 	}
