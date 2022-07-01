@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 15:46:02 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/01 12:05:22 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 22:30:29 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char				**remplir_tab(t_token *node, int start);
 int					count_size(t_token	*node, int start);
 int					remove_quotes(t_command *node);
 
-//expand dollar
+//expand VARS
 void				expand_dollar(t_command *node);
 int                 check_dollar(t_command	*list);
 char				*dollar_substr1(char *str);
@@ -74,8 +74,11 @@ int					is_dollar(char *str);
 int					get_env_end(char *str);
 const char			*ft_strstr(const char *str, const char *to_find);
 void                ft_expand(char **dest, char *sub, char *env);
-void                ex_free(char *sub, char *env);
+void                ex_free(char *sub, char **ptr);
 void                replace_sub(char **str, const char *old, const char *new_);
+char                *get_env1(char *env);
+void                fill_tab(char **ptr, char **dest);
+void                ft_break(int *flag, char *sub);
 
 //files creation
 void				ft_free(char *s1, char *s2);

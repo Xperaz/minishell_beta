@@ -6,11 +6,19 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:01 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/01 11:59:40 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 22:29:54 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+typedef struct dollar_ibfo
+{
+	int		i;
+	char	*sub;
+	int		flag;
+	char	**ptr;
+}	t_dinfo;
 
 void	fast_strncat(char *dest, const char *src, size_t *size)
 {
@@ -76,27 +84,29 @@ void	replace_sub(char **str, const char *old, const char *new_)
 
 void	expand_dollar(t_command *node)
 {
-	int		i;
-	char	*sub;
-	char	*env;
-	int		flag;
-
+	t_dinfo	info;
+	
 	while (node)
 	{
-		flag = 0;
-		i = -1;
-		while (node->cmd[++i])
+		info.flag = 0;
+		info.i = -1;
+		while (node->cmd[++info.i])
 		{
-			if (is_dollar(node->cmd[i]) >= 0 && node->cmd[i][0] != '\'')
+			if (is_dollar(node->cmd[info.i]) >= 0 && node->cmd[info.i][0] != '\'')
 			{
-				flag = 1;
-				sub = dollar_substr(node->cmd[i]);
-				env = dollar_substr1(node->cmd[i]);
-				ft_expand(&node->cmd[i], sub, env);
+				info.flag = 1;
+				info.sub = dollar_substr(node->cmd[info.i]);
+				if (!ft_strcmp1(info.sub, "$"))
+				{
+					ft_break(&info.flag, info.sub);
+					return ;
+				}
+				info.ptr = ft_split(info.sub, '$');
+				fill_tab(info.ptr, &node->cmd[info.i]);
 			}
 		}
-		if (flag == 1)
-			ex_free(sub, env);
+		if (info.flag == 1)
+			ex_free(info.sub, info.ptr);
 		node = node->next;
 	}
 }
