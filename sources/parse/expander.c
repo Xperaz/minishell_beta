@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:01 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/30 19:03:18 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:59:40 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,26 +84,19 @@ void	expand_dollar(t_command *node)
 	while (node)
 	{
 		flag = 0;
-		i = 0;
-		while (node->cmd[i])
+		i = -1;
+		while (node->cmd[++i])
 		{
 			if (is_dollar(node->cmd[i]) >= 0 && node->cmd[i][0] != '\'')
 			{
 				flag = 1;
 				sub = dollar_substr(node->cmd[i]);
 				env = dollar_substr1(node->cmd[i]);
-				if (getenv(env))
-					replace_sub(&node->cmd[i], sub, getenv(env));
-				else if (!getenv(env))
-					replace_sub(&node->cmd[i], sub, "");
+				ft_expand(&node->cmd[i], sub, env);
 			}
-			i++;
 		}
 		if (flag == 1)
-		{
-			free(sub);
-			free(env);
-		}
+			ex_free(sub, env);
 		node = node->next;
 	}
 }

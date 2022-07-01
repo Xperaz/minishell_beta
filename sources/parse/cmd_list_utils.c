@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:51 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/30 21:54:11 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:18:01 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,20 @@ void	*free_tab(char **array)
 	return (NULL);
 }
 
-void	delete_cmd(t_command **head, t_command *del_node)
-{
-	if (*head == NULL || del_node == NULL)
-		return ;
-	if (*head == del_node)
-		*head = del_node->next;
-	free(del_node);
-}
-
 void	clear_cmds(t_command **head)
 {
-	t_command *tmp;
+	t_command	*tmp;
 
-   while ((*head) != NULL)
-    {
-       tmp = *head;
-       (*head) = (*head)->next;
-	   if (tmp->herdoc == 1)
-	   {
-	   	free_tab(tmp->delims);
-	   	free(tmp->del);
-	   }
-	   free_tab(tmp->cmd);
-       free(tmp);
-    }
+	while ((*head) != NULL)
+	{
+		tmp = *head;
+		(*head) = (*head)->next;
+		if (tmp->herdoc == 1)
+		{
+			free_tab(tmp->delims);
+			free(tmp->del);
+		}
+		free_tab(tmp->cmd);
+		free(tmp);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:07:29 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/30 10:41:21 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 01:01:37 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 
 # include	<stdio.h>
 # include	<stdlib.h>
-// # include	<string.h>
+# include	<string.h>
 # include	<errno.h>
 # include 	<unistd.h>
 # include	<stdint.h>
 # include   <sys/wait.h>
-# include   <paths.h> // ! for _PATH in case there isn't a PATH in the env
+#include    <sys/ioctl.h>
+# include   <paths.h>
 # include	"../libft/libft.h"
 # include	"structs.h"
 # include	"parse.h"
 # include 	<fcntl.h>
-# include 	<signal.h>
-# include    <string.h> 
+# include 	<signal.h> 
 # include	<readline/history.h>
 # include	<readline/readline.h>
 
@@ -42,7 +42,7 @@
 # define NO_ENV         0
 
 
-void display(t_command *node);
+
 
 t_list	*get_list(char **env, t_list *head);
 t_list	*create_node(char **command_list);
@@ -57,8 +57,7 @@ int		export();
 int 	unset();
 void	exec(char *command_list, t_list *env_list);
 void	add_back(t_list **head, t_list *new_node);
-void	status(int status);
-int		exit_command(t_list *command_list, t_list *env_list);
+void     exiting();
 
 void    prompt_init(void);
 void	quit_minishell(int exit_code, char *error_msg);
@@ -76,7 +75,8 @@ void        run_builtins();
 void	    get_env(char **env);
 int         ft_env_size(t_env *env);
 void	    add_env_back(t_env **head, t_env *new_node);
-t_env	    *create_env_node(char **env, char *str); 
+t_env	    *create_env_node(char **env, char *str);
+void        run_her_doc();
 
 
 

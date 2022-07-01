@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   remove_unused_tab.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/01 12:01:18 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/07/01 12:02:23 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 int	count_unsed(char **tab)
 {
-	int i;
+	int	i;
 	int	len;
 
 	len = 0;
@@ -18,8 +30,8 @@ int	count_unsed(char **tab)
 
 int	count_tab(char **tab)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (tab[i])
 		i++;

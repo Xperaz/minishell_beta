@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:19:48 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/30 21:35:38 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:57:13 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,16 @@ typedef struct tokens {
 
 typedef struct command {
 	char    **cmd;
-	int		infile;
-	int		outfile;
-	int		herdoc;
-	char 	**delims;
-	char	*del;
-	int		flag;
+	int		infile; 
+	int		outfile; 
+	int		herdoc; // ~ there is a herdoc 
+	char 	**delims; // ~ how many delemiters 
+	char	*del; // ~ not my business
+	int		flag; // ~ not my business
 	struct	command *next;
 	t_builtins	cmd_type;
 } t_command;
 
-// ~ ******************** REMOVE UNUSED ARRAYS ************************* ~ \\
-
-typedef struct unsed
-{
-	int 	count;
-	int		total;
-	char	**tab;
-	int		i;
-	int		j;	
-} t_remove;
 
 // ~ ********************* 🅴🅽🆅🅸🆁🅴🅼🅴🅽🆃 🆂🆃🆁🆄🅲🆃 *********************** ~ \\
 
@@ -107,6 +97,17 @@ typedef struct dollar
 	char		*buff;
 }	t_info;
 
+// ~ ******************** REMOVE UNUSED ARRAYS ************************* ~ \\
+
+typedef struct unsed
+{
+	int 	count;
+	int		total;
+	char	**tab;
+	int		i;
+	int		j;	
+} t_remove;
+
 // ~ ********************* 🅶🅻🅾🅱🅰🅻 🆂🆃🆁🆄🅲🆃 *********************** ~ \\
 
 typedef struct s_msh
@@ -121,6 +122,8 @@ typedef struct s_msh
 	int  		cmd_number;
 	int			pipe_id;
 	int			*pipefd;
+	int			her_signal;
+	int			fd;
 	uint8_t		exit_status;
 }				t_msh;
 

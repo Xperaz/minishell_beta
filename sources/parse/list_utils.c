@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:22 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/30 16:13:25 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:15:25 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,6 @@ void	add_to_end(t_token **token, t_token *new)
 	else
 		(*token) = new;
 	(*token)->taille++;
-}
-
-void	delete_node(t_token **head, t_token *del_node)
-{
-	if (*head == NULL || del_node == NULL)
-		return ;
-	if (*head == del_node)
-		*head = del_node->next;
-	if (del_node->next != NULL)
-		del_node->next->prev = del_node->prev;
-	if (del_node->prev != NULL)
-		del_node->prev->next = del_node->next;
-	free(del_node);
 }
 
 void	*free_node(void *ptr)

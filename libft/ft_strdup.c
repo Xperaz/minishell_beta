@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:50:55 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/29 16:26:36 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/06/08 08:19:47 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,5 @@ char	*ft_strdup(const char *src)
 		}
 		ptr[j] = ('\0');
 	}
-	else
-		return (NULL);
 	return (ptr);
 }

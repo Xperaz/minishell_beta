@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/30 21:35:53 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:59:09 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,44 +40,6 @@ void display(t_command *node) {
    		tmp = tmp->next;
 		   printf("\n");
 	}
-}
-
-int	check_dollar(t_command	*list)
-{
-	t_command	*tmp;
-	int			i;
-
-	tmp = list;
-	while (tmp)
-	{
-		i = 0;
-		while (tmp->cmd[i])
-		{
-			if (is_dollar(tmp->cmd[i]) != -1)
-				return (1);
-			i++;
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	is_file2(t_command *node)
-{
-	int	i;
-
-	while (node)
-	{
-		i = 0;
-		while (node->cmd[i])
-		{
-			if (is_redirection(node->cmd[i]))
-				return (i);
-			i++;
-		}
-		node = node->next;
-	}
-	return (-1);
 }
 
 /*                         LEXER.                       */
@@ -148,7 +110,8 @@ void	ft_prompt(void)
 		if (command_checker(command))
 			break;
 		cmds = parser(command);
-		display(cmds);
+		execute(cmds);
+		//display(cmds);
 		clear_cmds(&cmds);
 		free (command);
 	}
@@ -163,8 +126,8 @@ int	main(int ac, char **av, char **env)
 {
 	signal(SIGINT, handle_sig);
 	signal(SIGQUIT, handle_sig);
-	// ft_bzero(&g_msh, sizeof(g_msh));
-	// data_management(NULL ,ENV, env);
+	ft_bzero(&g_msh, sizeof(g_msh));
+	data_management(NULL ,ENV, env);
 	ft_prompt();
 	return (0);
 }
