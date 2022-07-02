@@ -71,7 +71,7 @@ int      remove_variable(char *to_remove)
 /* **************************************************** */
 
 
-int    unset()
+void    unset()
 {
 	int i;
 	int j;
@@ -82,9 +82,9 @@ int    unset()
 		j = 0;
 		while (g_msh.cmd->cmd[i][j])
 		{
-			if (!ft_isalnum(g_msh.cmd->cmd[i][j]) && g_msh.cmd->cmd[i][j] != '_')
+			if (!ft_isalpha(g_msh.cmd->cmd[i][0]) || (!ft_isalnum(g_msh.cmd->cmd[i][j]) && g_msh.cmd->cmd[i][j] != '_'))
 			{
-				printf("unset: %s : not a valid identifier \n", g_msh.cmd->cmd[i]);
+				quit_minishell(1, "unset: not a valid identifier");
 				break ;
 			}
 			j++;
@@ -92,6 +92,5 @@ int    unset()
 		remove_variable(g_msh.cmd->cmd[i]);      
 		i++;
 	 }
-	return(0);
 }
 

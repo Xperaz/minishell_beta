@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:07:29 by houazzan          #+#    #+#             */
-/*   Updated: 2022/07/01 01:01:37 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/02 00:02:26 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include 	<unistd.h>
 # include	<stdint.h>
 # include   <sys/wait.h>
-#include    <sys/ioctl.h>
+# include   <sys/ioctl.h>
+# include	<sys/stat.h>
 # include   <paths.h>
 # include	"../libft/libft.h"
 # include	"structs.h"
@@ -37,7 +38,6 @@
 # define INVALID	": not a valid identifier"
 # define ADD_FUTERS		1
 # define SIMPLE		    0
-# define EXIT_STATUS	0
 # define IS_ENV         1
 # define NO_ENV         0
 
@@ -52,12 +52,12 @@ void	error(char *str);
 int     pwd();
 int     env(int state);
 void	free_env(t_list *env_list);
-int		cd();
-int		export();
-int 	unset();
+void	cd();
+void	export();
+void	unset();
 void	exec(char *command_list, t_list *env_list);
 void	add_back(t_list **head, t_list *new_node);
-void     exiting();
+void    exiting();
 
 void    prompt_init(void);
 void	quit_minishell(int exit_code, char *error_msg);

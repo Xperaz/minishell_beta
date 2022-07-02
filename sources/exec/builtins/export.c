@@ -61,19 +61,20 @@ int already_exist(char **table, char *str)
 /*                  🅸🅽🆅🅰🅻🅸🅳_🆅🅽                    */
 /* **************************************************** */
 
-void	invalid_vn(char	*table)
+int	invalid_vn(char	*table)
 {
 	int i;
 	
 	i = 1;
 	if (ft_strlen(ft_strchr(table, '+')) >  1 || (!ft_isalpha(table[0]) && table[0] != '_'))
-		quit_minishell(1, ft_strjoin(ft_strjoin("export ", table)," : not a valid identifier"));
+		return (quit_minishell(1, ft_strjoin(ft_strjoin("export ", table)," : not a valid identifier")), 1);
 	while (table[i])
 	{
 		if (!ft_isdigit(table[i]) && !ft_isalpha(table[i]) && table[i] != '_' && table[i] != '+')
-			quit_minishell(1, ft_strjoin(ft_strjoin("export ", table),": not a valid identifier"));
+			return (quit_minishell(1, ft_strjoin(ft_strjoin("export ", table),": not a valid identifier")), 1);
 		i++;
 	}
+	return(0);
 }
 
 
@@ -92,11 +93,13 @@ int	export_vname()
 	while (g_msh.cmd->cmd[i] != NULL) 
 	{
 		table = ft_sp_split(g_msh.cmd->cmd[i], '=');
-		invalid_vn(table[0]);
-		if (already_exist(table, g_msh.cmd->cmd[i]) != 1)
+		if (!invalid_vn(table[0]))
 		{
-			node = create_env_node(table, g_msh.cmd->cmd[i]);
-			add_env_back(&g_msh.dup_envp, node);
+			if (already_exist(table, g_msh.cmd->cmd[i]) != 1)
+			{
+				node = create_env_node(table, g_msh.cmd->cmd[i]);
+				add_env_back(&g_msh.dup_envp, node);
+			}
 		}
 		free(table);
 		i++;
@@ -108,14 +111,13 @@ int	export_vname()
 /*                    🅴🆇🅿🅾🆁🆃                        */
 /* **************************************************** */
 
-int	export()
+void	export()
 {
 	if (g_msh.cmd->cmd[1] == NULL)
 		env(ADD_FUTERS);
 	else
 		if (export_vname())
-			quit_minishell(EXIT_FAILURE, "variable name undefined");
-	return (0);
+			quit_minishell(1, "variable name undefined");
 }
 
 

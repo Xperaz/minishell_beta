@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:23 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/30 19:25:46 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 13:13:22 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	ft_strcmp1(char *s1, char *s2)
 t_command	*creat_cmds(t_token *node)
 {
 	t_command	*cmds;
+	t_command	*ptr;
 	int			lst_size;
 	int			start;
 
@@ -46,5 +47,12 @@ t_command	*creat_cmds(t_token *node)
 		start += count_size(node, start) + 1;
 	}
 	list_clear(&node);
+	ptr = cmds;
+	while(ptr)
+	{
+		ptr->infile = 0;
+		ptr->outfile = 1;
+		ptr = ptr->next;
+	}
 	return (cmds);
 }

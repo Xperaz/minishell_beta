@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/01 21:38:55 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 15:42:34 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -75,9 +76,6 @@ t_command	*parser(char *line)
 	cmd_list = creat_cmds(list);
 	if (check_dollar(cmd_list))
 		expand_dollar(cmd_list);
-	cmd_list->infile = 0;
-	cmd_list->outfile = 1;
-	cmd_list->herdoc = 0;
 	if (is_file2(cmd_list) != -1)
 	{
 		open_files(cmd_list);
@@ -101,7 +99,6 @@ void	ft_prompt(void)
 	while (1)
 	{
 		command = readline("$> ");
-
 		if (!command)
 			ctrl_d(command);
 		ft_check(command);
@@ -110,8 +107,9 @@ void	ft_prompt(void)
 		if (command_checker(command))
 			break;
 		cmds = parser(command);
-		execute(cmds);
-		//display(cmds);
+		if (g_msh.syntax_err)
+			execute(cmds);
+	//	display(cmds);
 		clear_cmds(&cmds);
 		free (command);
 	}
@@ -127,7 +125,8 @@ int	main(int ac, char **av, char **env)
 	signal(SIGINT, handle_sig);
 	signal(SIGQUIT, handle_sig);
 	ft_bzero(&g_msh, sizeof(g_msh));
-	data_management(NULL ,ENV, env);
+	if (!g_msh.my_env)
+		data_management(NULL ,ENV, env);
 	ft_prompt();
 	return (0);
 }

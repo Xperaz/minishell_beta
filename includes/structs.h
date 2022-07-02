@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:19:48 by houazzan          #+#    #+#             */
-/*   Updated: 2022/07/01 00:57:13 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:25:54 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_msh
 	int  		cmd_number;
 	int			pipe_id;
 	int			*pipefd;
-	int			her_signal;
+	int			syntax_err;
 	int			fd;
 	uint8_t		exit_status;
 }				t_msh;

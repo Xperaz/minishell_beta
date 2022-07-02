@@ -1,6 +1,6 @@
 CC = gcc 
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror 
 
 EXEC_FILES = sources/exec/
 

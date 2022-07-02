@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:08:13 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/29 09:29:45 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/01 17:18:26 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	env_list_to_array()
 		ptr = ptr->next;
 		i++;
 	}
+	i = 0;
 }
 
 
@@ -106,14 +107,13 @@ void	get_env(char **env)
 	while (env[i])
 	{
 		node = create_env_node(ft_sp_split(env[i], '='), NULL);
+		if (ft_strncmp(node->key, "OLDPWD=", 8) == 0)
+		{
+			node->key = ft_strtrim(node->key, "=");
+			node->value = ""; 
+		}
 		add_env_back(&g_msh.dup_envp, node);
 		i++;
-	}
-	if (!already_there(&g_msh.dup_envp))
-	{
-		node = create_env_node(ft_split("OLDPWD", ' '), NULL);
-		node->key = ft_strtrim(node->key, "=");
-		add_env_back(&g_msh.dup_envp, node);
 	}
 }
 

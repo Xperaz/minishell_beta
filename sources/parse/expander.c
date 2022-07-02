@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:01 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/01 22:29:54 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 16:55:47 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,31 @@ void	replace_sub(char **str, const char *old, const char *new_)
 	free(info.buff);
 }
 
-void	expand_dollar(t_command *node)
+void	expand_dollar(t_command *lst)
 {
 	t_dinfo	info;
-	
-	while (node)
+
+	while (lst)
 	{
 		info.flag = 0;
 		info.i = -1;
-		while (node->cmd[++info.i])
+		while (lst->cmd[++info.i])
 		{
-			if (is_dollar(node->cmd[info.i]) >= 0 && node->cmd[info.i][0] != '\'')
+			if (is_dollar(lst->cmd[info.i]) >= 0 && lst->cmd[info.i][0] != '\'')
 			{
 				info.flag = 1;
-				info.sub = dollar_substr(node->cmd[info.i]);
+				info.sub = dollar_substr(lst->cmd[info.i]);
 				if (!ft_strcmp1(info.sub, "$"))
 				{
 					ft_break(&info.flag, info.sub);
 					return ;
 				}
 				info.ptr = ft_split(info.sub, '$');
-				fill_tab(info.ptr, &node->cmd[info.i]);
+				fill_tab(info.ptr, &lst->cmd[info.i]);
 			}
 		}
 		if (info.flag == 1)
 			ex_free(info.sub, info.ptr);
-		node = node->next;
+		lst = lst->next;
 	}
 }

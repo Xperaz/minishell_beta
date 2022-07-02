@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:45:18 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/30 21:46:22 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/01 21:55:19 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	allocating()
 
 void  data_management(t_command *cmds, int decission, char **env)
 {
-	g_msh.her_signal = -1;
 	if (decission == ENV)
 	{
+		g_msh.syntax_err = 1;
 		allocating();
 		get_env(env); // ^ for g_msh.dup_envp
 		get_path(); // ^ for g_msh.separ_path

@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:08:19 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/01 22:30:15 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 16:50:16 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ int	check_dollar(t_command	*list)
 
 char	*get_env1(char *env)
 {	
-	t_env *ptr;
+	t_env	*ptr;
 
 	ptr = g_msh.dup_envp;
-	while(ptr)
-    {
+	while (ptr)
+	{
 		if (!ft_strcmp1(env, ft_strndup(ptr->key, ft_strlen(ptr->key) - 1)))
 			return (ft_strdup(ptr->value));
-        ptr = ptr->next;
-    }
+		ptr = ptr->next;
+	}
 	return (NULL);
 }
 
@@ -56,7 +56,7 @@ void	fill_tab(char **ptr, char **dest)
 {
 	char	*val;
 	int		j;
-	
+
 	remove_all_chars(*dest, '$');
 	j = 0;
 	while (ptr[j])

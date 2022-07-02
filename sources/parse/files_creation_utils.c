@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:06 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/06/28 10:50:57 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/02 16:00:44 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	open_app_redirect_out(char *file, t_command *node)
 {
 	int	fd;
 
-	if ((!access(file, F_OK)) == 0)
+	if ((access(file, F_OK)) == 0)
 	{
-		fd = open(file, O_WRONLY, S_IWUSR);
+		fd = open(file, O_APPEND | O_WRONLY, S_IWUSR);
 		node->outfile = fd;
 	}
 	else
@@ -50,7 +50,7 @@ void	open_app_redirect_out(char *file, t_command *node)
 	}
 }
 
-void	open_redirect_out(char *fl, t_command *node)
+void	open_redirect_out1(char *fl, t_command *node)
 {
 	int	fd;
 
@@ -58,11 +58,24 @@ void	open_redirect_out(char *fl, t_command *node)
 	node->outfile = fd;
 }
 
+void	open_redirect_out(char *fl, t_command *node)
+{
+	int	fd;
+
+	fd = open(fl,  O_TRUNC | O_RDWR | O_CREAT, 0666);
+	node->outfile = fd;
+}
+
 void	ft_out_file(t_command *node, int *i)
 {
-	if (!ft_strcmp1(node->cmd[*i], ">") || !ft_strcmp1(node->cmd[*i], "<>"))
+	if (!ft_strcmp1(node->cmd[*i], ">"))
 	{
 		open_redirect_out(node->cmd[*i + 1], node);
+		ft_free(node->cmd[*i + 1], node->cmd[*i]);
+	}
+	else if (!ft_strcmp1(node->cmd[*i], "<>"))
+	{
+		open_redirect_out1(node->cmd[*i + 1], node);
 		ft_free(node->cmd[*i + 1], node->cmd[*i]);
 	}
 	else if (!ft_strcmp1(node->cmd[*i], ">>"))
