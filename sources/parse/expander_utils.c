@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:56 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 16:55:58 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 18:56:34 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	is_dollar(char *str)
 {
 	int	i;
 
+	if (ft_strcmp(str, "$?") == 0)
+		return (-1);
 	i = 0;
 	while (str[i])
 	{
-		if (ft_strcmp(str, "$?") == 0)
-			return (-1);
 		if (str[i] == '$')
 			return (i);
 		i++;

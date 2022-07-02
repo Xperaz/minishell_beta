@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_creation_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:06 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 16:00:44 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/02 17:37:27 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,6 @@ void	open_app_redirect_out(char *file, t_command *node)
 		fd = open(file, O_CREAT, S_IWUSR);
 		node->outfile = fd;
 	}
-}
-
-void	open_redirect_out1(char *fl, t_command *node)
-{
-	int	fd;
-
-	fd = open(fl, O_CREAT, S_IRWXU);
-	node->outfile = fd;
-}
-
-void	open_redirect_out(char *fl, t_command *node)
-{
-	int	fd;
-
-	fd = open(fl,  O_TRUNC | O_RDWR | O_CREAT, 0666);
-	node->outfile = fd;
 }
 
 void	ft_out_file(t_command *node, int *i)

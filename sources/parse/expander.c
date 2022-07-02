@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:01 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 16:55:47 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 22:32:47 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,27 @@ void	expand_dollar(t_command *lst)
 			{
 				info.flag = 1;
 				info.sub = dollar_substr(lst->cmd[info.i]);
+				int j = 0;
+				char *val = malloc(ft_strlen(info.sub) * sizeof(char));
+				printf("%s\n", info.sub);
+				while (info.sub[j] == '$' && info.sub[j + 1] == '$')
+				{
+					val[j] = info.sub[j];
+					j++;
+				}
+				printf("{%s} [%d]\n", val, j);
+				val[j] = '\0';
+				if (j > 0)
+				{
+					
+					replace_sub(&lst->cmd[info.i], val, "123456");
+				}
 				if (!ft_strcmp1(info.sub, "$"))
 				{
-					ft_break(&info.flag, info.sub);
+					replace_sub(&lst->cmd[info.i], info.sub, "$");
 					return ;
 				}
+				printf("***%s****\n", info.sub);
 				info.ptr = ft_split(info.sub, '$');
 				fill_tab(info.ptr, &lst->cmd[info.i]);
 			}

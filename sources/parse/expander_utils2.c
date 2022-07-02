@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:08:19 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 16:50:16 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 22:30:28 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,35 @@ void	fill_tab(char **ptr, char **dest)
 	char	*val;
 	int		j;
 
-	remove_all_chars(*dest, '$');
+	//remove_all_chars(*dest, '$');
 	j = 0;
 	while (ptr[j])
 	{
+		char *array = ft_strdup(ptr[j]);
+		int len = ft_strlen(array) + 1;
+		ft_memmove(array + 1, array, len);
+		array[0] = '$';
+		//array[len] = '\0';
+		// printf("{%s}\n", array);
 		val = get_env1(ptr[j]);
+		array[0] = '$';
 		if (!val)
-			replace_sub(dest, ptr[j], "");
+			replace_sub(dest, array, "");
 		j++;
 	}
 	j = 0;
 	while (ptr[j])
 	{
+		// printf("{%s}\n", ptr[j]);
+		char *array = ft_strdup(ptr[j]);
+		int len = ft_strlen(array) + 1;
+		ft_memmove(array + 1, array, len);
+		array[0] = '$';
+		//array[len] = '\0';
+		// printf("{%s}\n", array);
 		val = get_env1(ptr[j]);
 		if (val)
-			replace_sub(dest, ptr[j], val);
+			replace_sub(dest, array, val);
 		j++;
 	}
 	free(val);

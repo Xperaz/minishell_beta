@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:07:25 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/01 12:00:55 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/02 17:37:32 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,20 @@ int	is_file2(t_command *node)
 		node = node->next;
 	}
 	return (-1);
+}
+
+void	open_redirect_out1(char *fl, t_command *node)
+{
+	int	fd;
+
+	fd = open(fl, O_CREAT, S_IRWXU);
+	node->outfile = fd;
+}
+
+void	open_redirect_out(char *fl, t_command *node)
+{
+	int	fd;
+
+	fd = open(fl, O_TRUNC | O_RDWR | O_CREAT, 0666);
+	node->outfile = fd;
 }

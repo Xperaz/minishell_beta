@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:36 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 14:39:11 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/02 17:39:01 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/minishell.h"
 
@@ -19,7 +18,6 @@ void	handle_sig(int sig)
 	{
 		printf("\033[K$>\n");
 		rl_replace_line("", 0);
-
 		rl_on_new_line();
 		rl_redisplay();
 	}
