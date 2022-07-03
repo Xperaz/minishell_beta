@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:23:29 by houazzan          #+#    #+#             */
-/*   Updated: 2022/06/29 12:49:32 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/03 02:35:39 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	export_env()
 		ptr = g_msh.dup_envp;
 		while (ptr)
 		{
-			if (ft_strcmp(ptr->key, g_msh.sort_env[i]) == 0)
+			if (ft_strcmp(ft_strtrim(ptr->key, "="),ft_strtrim(g_msh.sort_env[i], "=")) == 0)
 			{
 				if (ft_strchr(ptr->key, '='))
 					printf("%s\"%s\"\n", ptr->key, ptr->value);  
@@ -93,14 +93,21 @@ int    env(int state)
 	if (state == ADD_FUTERS)
 		export_env();
 	else
-		while (ptr!= NULL)
+	{
+		if (g_msh.cmd->cmd[1])
+			return (quit_minishell(1, "env: No such file or directory"), 1);
+		else
 		{
-			if (strstr(ptr->key, "=") != NULL)
+			while (ptr!= NULL)
 			{
-				printf("%s", ptr->key);
-				printf("%s\n", ptr->value);
+				if (strstr(ptr->key, "=") != NULL)
+				{
+					printf("%s", ptr->key);
+					printf("%s\n", ptr->value);
+				}
+				ptr= ptr->next;
 			}
-			ptr= ptr->next;
 		}
-		return (0);
+	}
+	return (0);
 }

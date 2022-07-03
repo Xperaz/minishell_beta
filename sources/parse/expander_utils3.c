@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_utils3.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/03 19:47:40 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/07/03 23:28:18 by aouhadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 char	*get_id(int p)
 {
 	char	*val;
-	
+
 	if (p % 2 == 0)
 	{
 		if (p == 2)
-			val = ft_strdup(ft_itoa(getpid()));
+			val = ft_strdup("10000");
 		else
-			val = ft_strjoin(ft_itoa(getpid()), val);
+			val = ft_strjoin("10000", val);
 	}
 	return (val);
 }
 
-void	replace_id(char *ptr, t_dinfo info)
+void	replace_id(char *ptr, t_dinfo *info)
 {
-	info.val1[info.j] = '\0';
-	if (info.j % 2 != 0)
-		info.val1[info.j - 1] = 0;
-	replace_sub(&ptr, info.val1, info.val);
+	info->val1[info->j] = '\0';
+	if (info->j % 2 != 0)
+		info->val1[info->j - 1] = 0;
+	replace_sub(&ptr, info->val1, info->val);
+	free(info->val);
 }
 
 int	all_vars(char *ptr)
@@ -46,11 +58,7 @@ void	call_expander(t_dinfo *info, char *com)
 		info->p++;
 	}
 	if (info->j % 2 == 0 || info->p > 2)
-	{
-		replace_id(com, *info);
-		free(info->val1);
-		free(info->val);
-	}
+		replace_id(com, info);
 }
 
 void	info_init(t_dinfo *info, char *cmd)
@@ -60,5 +68,5 @@ void	info_init(t_dinfo *info, char *cmd)
 	info->j = -1;
 	info->p = 1;
 	info->val = NULL;
-	info->val1 = malloc(sizeof(char) * ft_strlen(info->sub));
+	info->val1 = malloc(sizeof(char) * ft_strlen("10000"));
 }

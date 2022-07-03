@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:36 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 17:39:01 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:35:04 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 void	handle_sig(int sig)
 {
-	if (sig == SIGINT)
+	int	i;
+
+	i = 0;
+	if (sig == SIGINT && g_msh.signal == 0)
 	{
-		printf("\033[K$>\n");
 		rl_replace_line("", 0);
+		printf("\033[K$>\n");
 		rl_on_new_line();
 		rl_redisplay();
 	}
+	if (sig == SIGINT && g_msh.signal == 5)
+		i++;
 	if (sig == SIGQUIT)
 	{
 		rl_on_new_line();

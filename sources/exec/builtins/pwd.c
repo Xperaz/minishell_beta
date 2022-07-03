@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:16:02 by houazzan          #+#    #+#             */
-/*   Updated: 2022/07/01 23:32:16 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/03 02:37:51 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int   pwd()
     t_env *ptr;
 
     ptr = g_msh.dup_envp;
-    if (g_msh.cmd->cmd[1] && g_msh.cmd->cmd[1][0] == '-')
+    if (g_msh.cmd->cmd[1]) 
     {
-        quit_minishell(1, "pwd: invalid option");
-        return(1);
+        if (g_msh.cmd->cmd[1][0] == '-' && g_msh.cmd->cmd[1][1])
+            return (quit_minishell(1, "pwd: invalid option"), 1);
     }
     while (ptr != NULL)
     {

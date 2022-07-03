@@ -45,7 +45,7 @@ int	echo()
 
 	i = 1;
 	flag = 0;
-	if (ft_strcmp(g_msh.cmd->cmd[1], "$?") == 0)
+	if (g_msh.cmd->cmd[1] && ft_strcmp(g_msh.cmd->cmd[1], "$?") == 0)
 	{
 		printf("%d\n", g_msh.exit_status);
 		return (0);

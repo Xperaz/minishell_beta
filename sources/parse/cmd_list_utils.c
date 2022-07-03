@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:51 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/01 10:18:01 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 13:58:30 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,6 @@ void	clear_cmds(t_command **head)
 	{
 		tmp = *head;
 		(*head) = (*head)->next;
-		if (tmp->herdoc == 1)
-		{
-			free_tab(tmp->delims);
-			free(tmp->del);
-		}
 		free_tab(tmp->cmd);
 		free(tmp);
 	}

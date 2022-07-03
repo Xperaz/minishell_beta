@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:55:23 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 17:38:34 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:28:04 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_command	*creat_cmds(t_token *node)
 	{
 		ptr->infile = 0;
 		ptr->outfile = 1;
+		ptr->herdoc = 0;
 		ptr = ptr->next;
 	}
 	return (cmds);

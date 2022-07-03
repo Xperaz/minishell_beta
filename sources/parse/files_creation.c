@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:13 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 16:35:02 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:26:01 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,14 @@ void	open_files(t_command *node)
 		tmp->outfile = 1;
 		ft_open(tmp);
 		if (tmp->herdoc == 1)
+		{
 			tmp->delims = ft_split(tmp->del, ' ');
+			tmp->infile = open(".temp", O_CREAT | O_RDWR | O_TRUNC, 0666);
+			run_her_doc(tmp->delims, tmp->infile);
+			tmp->infile = open(".temp", O_RDWR);
+			free_tab(tmp->delims);
+			free(tmp->del);
+		}
 		tmp = tmp->next;
 	}
 }

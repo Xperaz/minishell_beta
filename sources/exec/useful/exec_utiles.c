@@ -6,7 +6,7 @@
 /*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:45:18 by houazzan          #+#    #+#             */
-/*   Updated: 2022/07/01 21:55:19 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/03 02:50:14 by houazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void  data_management(t_command *cmds, int decission, char **env)
 	}
 	else
 	{
-		g_msh.cmd = cmds;
-		env_list_to_array(); // ^ this one is for g_msh.my_env
+		g_msh.cmd = cmds; // ^ this one is for g_msh.my_env
+		env_list_to_array();
 		catagorize();
 	}
 }

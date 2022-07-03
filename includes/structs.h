@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:19:48 by houazzan          #+#    #+#             */
-/*   Updated: 2022/07/03 14:17:35 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 19:48:54 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ typedef struct s_msh
 	int			pipe_id;
 	int			*pipefd;
 	int			syntax_err;
-	int			fd;
+	int			h_fd[2];
+	int			signal;
 	uint8_t		exit_status;
 }				t_msh;
 

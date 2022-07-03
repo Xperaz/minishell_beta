@@ -1,6 +1,7 @@
 CC = gcc 
 
 FLAGS = -Wall -Wextra -Werror 
+#-fsanitize=address -fno-omit-frame-pointer
 
 EXEC_FILES = sources/exec/
 

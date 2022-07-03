@@ -6,7 +6,7 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:08:19 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/03 16:32:31 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 23:26:42 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	fill_tab(char **ptr, char **dest)
 		array[0] = '$';
 		if (!get_env1(ptr[j]))
 			replace_sub(dest, array, "");
+		free(array);
 	}
 	j = -1;
 	while (ptr[++j])
@@ -79,6 +80,7 @@ void	fill_tab(char **ptr, char **dest)
 		array[0] = '$';
 		if (get_env1(ptr[j]))
 			replace_sub(dest, array, get_env1(ptr[j]));
+		free(array);
 	}
 }
 

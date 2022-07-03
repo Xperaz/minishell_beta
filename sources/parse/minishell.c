@@ -6,12 +6,13 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/03 11:45:29 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 23:26:57 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/minishell.h"
+#include "termios.h"
 
 void display(t_command *node) {
 
@@ -24,22 +25,21 @@ void display(t_command *node) {
 		i = 0;
 		while (tmp->cmd[i])
 		{
-			printf("{%s} => |%d|\n", tmp->cmd[i], tmp->herdoc);
+			printf("{%s} => |%d| ==> |i = %d\n|", tmp->cmd[i], tmp->herdoc, i);
 			i++;
 		}
 		printf(" => outfile: [%d] => infile [%d]\n", tmp->outfile, tmp->infile);
-		if (tmp->herdoc == 1)
-		{
-			i = 0;
-			printf("\n *** herdoc **\n");
-			while (tmp->delims[i])
-			{
-				printf("|%s| ", tmp->delims[i]);
-				i++;
-			}
-		}
+		// if (tmp->herdoc == 1)
+		// {
+		// 	i = 0;
+		// 	printf("\n *** herdoc **\n");
+		// 	while (tmp->delims[i])
+		// 	{
+		// 		printf("|%s| ", tmp->delims[i]);
+		// 		i++;
+		// 	}
+		// }
    		tmp = tmp->next;
-		   printf("\n");
 	}
 }
 
@@ -105,14 +105,33 @@ void	ft_prompt(void)
 		if (!ft_strlen(command))
 			continue;
 		if (command_checker(command))
-			break;
+			rl_on_new_line();
 		cmds = parser(command);
-		if (g_msh.syntax_err)
-			execute(cmds);
 		// display(cmds);
+		 if (g_msh.syntax_err && cmds)
+			 execute(cmds);
 		clear_cmds(&cmds);
 		free (command);
 	}
+}
+
+
+void	hide_ctl()
+{
+	 struct termios attributes;
+
+    tcgetattr(STDIN_FILENO, &attributes);
+    attributes.c_lflag &= ~ECHOCTL;
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
+}
+
+void	show_ctl()
+{
+	 struct termios attributes;
+
+    tcgetattr(STDIN_FILENO, &attributes);
+    attributes.c_lflag |= ECHOCTL;
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
 }
 
 /* **************************************************** */
@@ -122,11 +141,14 @@ void	ft_prompt(void)
 
 int	main(int ac, char **av, char **env)
 {
+	g_msh.signal = 0;
 	signal(SIGINT, handle_sig);
-	signal(SIGQUIT, handle_sig);
+	signal(SIGQUIT, SIG_IGN);
+	hide_ctl();
 	ft_bzero(&g_msh, sizeof(g_msh));
 	if (!g_msh.my_env)
 		data_management(NULL ,ENV, env);
 	ft_prompt();
+	show_ctl();
 	return (0);
 }
