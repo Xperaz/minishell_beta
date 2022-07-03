@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:27 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 15:42:34 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/03 11:45:29 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_prompt(void)
 		cmds = parser(command);
 		if (g_msh.syntax_err)
 			execute(cmds);
-	//	display(cmds);
+		// display(cmds);
 		clear_cmds(&cmds);
 		free (command);
 	}

@@ -6,16 +6,21 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:08:19 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 22:30:28 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 16:32:31 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ex_free(char *sub, char **ptr)
+void	ex_free(t_dinfo info)
 {
-	free(sub);
-	free_tab(ptr);
+	if (info.flag == 3)
+	{
+		free(info.sub);
+		free_tab(info.ptr);
+	}
+	else
+		free(info.sub);
 }
 
 int	check_dollar(t_command	*list)
@@ -54,41 +59,27 @@ char	*get_env1(char *env)
 
 void	fill_tab(char **ptr, char **dest)
 {
-	char	*val;
+	char	*array;
 	int		j;
 
-	//remove_all_chars(*dest, '$');
-	j = 0;
-	while (ptr[j])
+	j = -1;
+	while (ptr[++j])
 	{
-		char *array = ft_strdup(ptr[j]);
-		int len = ft_strlen(array) + 1;
-		ft_memmove(array + 1, array, len);
+		array = ft_strdup(ptr[j]);
+		ft_memmove(array + 1, array, ft_strlen(array) + 1);
 		array[0] = '$';
-		//array[len] = '\0';
-		// printf("{%s}\n", array);
-		val = get_env1(ptr[j]);
-		array[0] = '$';
-		if (!val)
+		if (!get_env1(ptr[j]))
 			replace_sub(dest, array, "");
-		j++;
 	}
-	j = 0;
-	while (ptr[j])
+	j = -1;
+	while (ptr[++j])
 	{
-		// printf("{%s}\n", ptr[j]);
-		char *array = ft_strdup(ptr[j]);
-		int len = ft_strlen(array) + 1;
-		ft_memmove(array + 1, array, len);
+		array = ft_strdup(ptr[j]);
+		ft_memmove(array + 1, array, ft_strlen(array) + 1);
 		array[0] = '$';
-		//array[len] = '\0';
-		// printf("{%s}\n", array);
-		val = get_env1(ptr[j]);
-		if (val)
-			replace_sub(dest, array, val);
-		j++;
+		if (get_env1(ptr[j]))
+			replace_sub(dest, array, get_env1(ptr[j]));
 	}
-	free(val);
 }
 
 void	ft_break(int *flag, char *sub)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houazzan <houazzan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:19:48 by houazzan          #+#    #+#             */
-/*   Updated: 2022/07/01 18:25:54 by houazzan         ###   ########.fr       */
+/*   Updated: 2022/07/03 14:17:35 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,18 @@ typedef struct dollar
 	const char	*temp;
 	char		*buff;
 }	t_info;
+
+typedef struct dollar_info
+{
+	int		i;
+	char	*sub;
+	int		flag;
+	char	**ptr;
+	int		j;
+	int		p;
+	char	*val;
+	char	*val1;
+}	t_dinfo;
 
 // ~ ******************** REMOVE UNUSED ARRAYS ************************* ~ \\
 

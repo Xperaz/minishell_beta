@@ -13,7 +13,7 @@ E_SRC  = execute.c useful/quite.c useful/free_list.c useful/exec_utiles.c useful
 	   
 P_SRC  =  minishell.c checker.c list_utils.c lis_utils2.c tokenizer.c toknizer_utils.c syntax_validation.c cmd_list_utils.c parser.c parser_utils.c \
 	      expander.c expander_utils.c files_creation.c files_creation_utils.c heredoc_utils.c signals.c remove_unused_tab.c\
-		  expander_utils2.c file_creation_utils2.c\
+		  expander_utils2.c file_creation_utils2.c expander_utils3.c\
 
 
 PARSE = $(addprefix $(PARSE_FILES), $(P_SRC))

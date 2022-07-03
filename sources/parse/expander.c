@@ -6,19 +6,11 @@
 /*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:56:01 by aouhadou          #+#    #+#             */
-/*   Updated: 2022/07/02 22:32:47 by aouhadou         ###   ########.fr       */
+/*   Updated: 2022/07/03 16:42:25 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-typedef struct dollar_ibfo
-{
-	int		i;
-	char	*sub;
-	int		flag;
-	char	**ptr;
-}	t_dinfo;
 
 void	fast_strncat(char *dest, const char *src, size_t *size)
 {
@@ -94,35 +86,17 @@ void	expand_dollar(t_command *lst)
 		{
 			if (is_dollar(lst->cmd[info.i]) >= 0 && lst->cmd[info.i][0] != '\'')
 			{
-				info.flag = 1;
-				info.sub = dollar_substr(lst->cmd[info.i]);
-				int j = 0;
-				char *val = malloc(ft_strlen(info.sub) * sizeof(char));
-				printf("%s\n", info.sub);
-				while (info.sub[j] == '$' && info.sub[j + 1] == '$')
+				info_init(&info, lst->cmd[info.i]);
+				call_expander(&info, lst->cmd[info.i]);
+				if ((info.j % 2 != 0 && !info.sub) || !all_vars(info.sub))
 				{
-					val[j] = info.sub[j];
-					j++;
+					info.flag = 3;
+					info.ptr = ft_split(info.sub, '$');
+					fill_tab(info.ptr, &lst->cmd[info.i]);
 				}
-				printf("{%s} [%d]\n", val, j);
-				val[j] = '\0';
-				if (j > 0)
-				{
-					
-					replace_sub(&lst->cmd[info.i], val, "123456");
-				}
-				if (!ft_strcmp1(info.sub, "$"))
-				{
-					replace_sub(&lst->cmd[info.i], info.sub, "$");
-					return ;
-				}
-				printf("***%s****\n", info.sub);
-				info.ptr = ft_split(info.sub, '$');
-				fill_tab(info.ptr, &lst->cmd[info.i]);
 			}
 		}
-		if (info.flag == 1)
-			ex_free(info.sub, info.ptr);
+		ex_free(info);
 		lst = lst->next;
 	}
 }
